@@ -1,0 +1,42 @@
+---
+type: "artwork"
+format: "serie"
+title: "Serie mediterráneo"
+slug: "meditarraneo"
+time: 20050101
+year: "2005"
+technic: "Mixta sobre papel"
+dimensions: "50x50"
+featured: "mediterraneo/featured.jpg"
+images:
+  - path: "mediterraneo/01.jpg"
+  - path: "mediterraneo/02.jpg"
+  - path: "mediterraneo/03.jpg"
+  - path: "mediterraneo/04.jpg"
+  - path: "mediterraneo/05.jpg"
+  - path: "mediterraneo/06.jpg"
+  - path: "mediterraneo/07.jpg"
+  - path: "mediterraneo/08.jpg"
+  - path: "mediterraneo/09.jpg"
+  - path: "mediterraneo/10.jpg"
+  - path: "mediterraneo/11.jpg"
+  - path: "mediterraneo/12.jpg"
+  - path: "mediterraneo/13.jpg"
+  - path: "mediterraneo/14.jpg"
+  - path: "mediterraneo/15.jpg"
+  - path: "mediterraneo/16.jpg"
+  - path: "mediterraneo/17.jpg"
+  - path: "mediterraneo/18.jpg"
+  - path: "mediterraneo/19.jpg"
+  - path: "mediterraneo/20.jpg"
+  - path: "mediterraneo/21.jpg"
+  - path: "mediterraneo/22.jpg"
+  - path: "mediterraneo/23.jpg"
+  - path: "mediterraneo/24.jpg"
+  - path: "mediterraneo/25.jpg"
+  - path: "mediterraneo/26.jpg"
+  - path: "mediterraneo/27.jpg"
+---
+Esta es una Serie (o carpeta) de obra mixta sobre papel, en honor a la
+realización de los [XV Juegos del Mediterráneo](http://almeriapedia.wikanda.es/wiki/Almer%C3%ADa_2005)
+organizados en Almería, en 2005.

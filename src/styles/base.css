@@ -1,0 +1,35 @@
+a {
+  color: #cc0000;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+}
+
+html, body {
+  height: 100vh;
+}
+
+body {
+  background-color: #F2F2F2;
+  opacity: 0;
+}
+
+.loading {
+  z-index: 1000;
+  transition: opacity .4s ease-in-out;
+  position: absolute;
+  background: #F2F2F2;
+  content: ' ';
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background-image: url('../images/favicon.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100px 100px;
+}
