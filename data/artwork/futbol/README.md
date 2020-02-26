@@ -1,0 +1,15 @@
+---
+type: artwork
+format: serie
+title: Serie fútbol
+slug: futbol
+time: 20060501
+year: 'Mayo 2006'
+technic: Mixta sobre papel
+dimensions: 100x140
+featured: featured.jpg
+images:
+  - image: 01.jpg
+  - image: 02.jpg
+  - image: 03.jpg
+---

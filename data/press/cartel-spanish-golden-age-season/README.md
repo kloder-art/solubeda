@@ -1,0 +1,16 @@
+---
+type: press
+title: Cartel Spanish Golden Age Season
+slug: cartel-spanish-golden-age-season
+date: 2014-01-09
+featured: punishment-without-revenge.jpg
+---
+
+Cartel para [Arcola Theater](https://www.arcolatheatre.com/) basado en la obra
+Guardainfanta, destinado a las jornadas "Spanish Golden Age Season".
+
+Versiones:
+
+- Cartel "La dama boba"
+- Cartel "Castigo sin venganza"
+- Cartel "Don Gil de las Calzas verdes"

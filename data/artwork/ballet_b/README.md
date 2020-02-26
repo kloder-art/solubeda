@@ -1,0 +1,16 @@
+---
+type: artwork
+format: serie
+title: Serie ballet B
+slug: ballet-b
+time: 20060101
+year: '2006'
+technic: Dibujos sobre papel
+dimensions: 100x70
+featured: featured.jpg
+images:
+  - image: 01.jpg
+  - image: 02.jpg
+  - image: 03.jpg
+  - image: 04.jpg
+---

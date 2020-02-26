@@ -1,8 +1,0 @@
----
-type: "press"
-title: "Decorado Jornadas de Teatro Siglo de Oro, Almería"
-slug: "decorado-siglo-de-oro"
-date: "2013-12-03"
-featured: "decorado_siglo_de_oro/01.jpg"
----
-Decorado para las [Jornadas de Teatro del Siglo de Oro](http://www.teatrosiglodeoro.org/) de Almería.
