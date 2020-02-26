@@ -7,10 +7,10 @@ import Cube from '../components/artwork/format/Cube';
 import Cam from '../components/artwork/format/Cam';
 
 const formatMap = {
-  'serie': Carousel,
-  'video': Video,
-  'cube': Cube,
-  'cam': Cam,
+  serie: Carousel,
+  video: Video,
+  cube: Cube,
+  cam: Cam,
 };
 
 export default ({ data }) => {
@@ -19,17 +19,12 @@ export default ({ data }) => {
   if (!Cmp) {
     console.error('Undefined format or unknown format for this artwork.');
   }
-  let images = [];
-  if (detail.frontmatter.images) {
-    images = detail.frontmatter.images.map(item => ({
-      ...item,
-      path: item.path !== 'false' ? require(`../data/artwork/${item.path}`) : false
-    }));
-  }
 
   return (
     <>
-      {Cmp && <Cmp data={detail} images={images} returnPage='/' />}
+      {Cmp && (
+        <Cmp data={detail} images={detail.frontmatter.images} returnPage="/" />
+      )}
     </>
   );
 };
@@ -51,7 +46,13 @@ export const query = graphql`
           title
           year
           dimensions
-          path
+          image {
+            childImageSharp {
+              original {
+                src
+              }
+            }
+          }
         }
       }
       rawMarkdownBody

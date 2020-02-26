@@ -8,7 +8,6 @@ import List from '../components/list/List';
 import Header from '../components/Header';
 
 const ExhibitionsPage = ({ data }) => {
-  
   return (
     <>
       <SEO title="Exposiciones" />
@@ -23,8 +22,7 @@ const ExhibitionsPage = ({ data }) => {
             desc: node.html,
           };
         })}
-        parseImgFn={(img) => require(`../data/exhibitions/${img}`)}
-        onItemClick={(slug) => {
+        onItemClick={slug => {
           store.dispatch(actions.setSidebarVisibility(false));
           navigate(`/exhibition/${slug}/`);
         }}
@@ -39,10 +37,7 @@ export const query = graphql`
   query {
     allMarkdownRemark(
       filter: { frontmatter: { type: { eq: "exhibition" } } }
-      sort: {
-        fields: [frontmatter___time]
-        order: DESC
-      }
+      sort: { fields: [frontmatter___time], order: DESC }
     ) {
       edges {
         node {
@@ -57,14 +52,26 @@ export const query = graphql`
             year
             technic
             dimensions
-            featured
+            featured {
+              childImageSharp {
+                original {
+                  src
+                }
+              }
+            }
             spanX
             spanY
             images {
               title
               year
               dimensions
-              path
+              image {
+                childImageSharp {
+                  original {
+                    src
+                  }
+                }
+              }
             }
           }
           rawMarkdownBody

@@ -36,19 +36,16 @@ const StyledListItem = styled.li`
   margin-bottom: 32px;
 `;
 
-const ListItem = (props) => {
-  const imagePath = props.parseImgFn(props.image);
-  return (
-    <StyledListItem
-      imagePath={imagePath}
-      onClick={() => props.onItemClick(props.slug)}
-    >
-      <div className={'title'}>
-        {props.date && <div className={'date'}>{props.date}</div>}
-        {props.title}
-      </div>
-    </StyledListItem>
-  );
-};
+const ListItem = ({ image, onItemClick, slug, date, title }) => (
+  <StyledListItem
+    imagePath={image.childImageSharp.original.src}
+    onClick={() => onItemClick(slug)}
+  >
+    <div className={'title'}>
+      {date && <div className={'date'}>{date}</div>}
+      {title}
+    </div>
+  </StyledListItem>
+);
 
 export default ListItem;

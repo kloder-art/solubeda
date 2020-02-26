@@ -11,7 +11,7 @@ export default ({ data }) => {
         <h2>{detail.frontmatter.title}</h2>
         <p>Publicado el {detail.frontmatter.date}</p>
         <img
-          src={require(`../data/press/${detail.frontmatter.featured}`)}
+          src={detail.frontmatter.featured.childImageSharp.original.src}
           alt={detail.frontmatter.title}
           style={{ maxWidth: '100%' }}
         />
@@ -30,7 +30,13 @@ export const query = graphql`
         title
         slug
         date(formatString: "DD/MM/YYYY")
-        featured
+        featured {
+          childImageSharp {
+            original {
+              src
+            }
+          }
+        }
       }
       rawMarkdownBody
       html

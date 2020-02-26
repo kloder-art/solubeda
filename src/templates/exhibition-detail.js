@@ -6,12 +6,13 @@ import Carousel from '../components/artwork/format/Carousel';
 import Video from '../components/artwork/format/Video';
 import Cube from '../components/artwork/format/Cube';
 import Slideshow from '../components/artwork/format/Slideshow';
+import SEO from '../components/Seo';
 
 const formatMap = {
-  'serie': Carousel,
-  'video': Video,
-  'cube': Cube,
-  'slideshow': Slideshow,
+  serie: Carousel,
+  video: Video,
+  cube: Cube,
+  slideshow: Slideshow,
 };
 
 export default ({ data }) => {
@@ -21,20 +22,20 @@ export default ({ data }) => {
     console.error('Undefined format o unknown format for this artwork.');
   }
 
-  let images = [];
-  if (detail.frontmatter.images) {
-    images = detail.frontmatter.images.map(item => (
-      { ...item, path: require(`../data/exhibitions/${item.path}`) }
-    ));
-  }
-
   useEffect(() => {
     store.dispatch(actions.setSidebarVisibility(false));
   }, []);
 
   return (
     <>
-      {Cmp && <Cmp data={detail} images={images} returnPage='/exhibitions' />}
+      <SEO title={detail.frontmatter.title} />
+      {Cmp && (
+        <Cmp
+          data={detail}
+          images={detail.frontmatter.images}
+          returnPage="/exhibitions"
+        />
+      )}
     </>
   );
 };
@@ -55,7 +56,16 @@ export const query = graphql`
           title
           year
           dimensions
-          path
+          image {
+            childImageSharp {
+              fluid(maxWidth: 1080) {
+                ...GatsbyImageSharpFluid
+              }
+              original {
+                src
+              }
+            }
+          }
         }
       }
       rawMarkdownBody

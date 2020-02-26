@@ -10,12 +10,11 @@ const StyledCarousel = styled(CarouselCmp)`
   overflow: hidden;
 
   .carousel-slider {
-
     height: 100vh;
     overflow: hidden;
 
     .control-arrow {
-      opacity: .3;
+      opacity: 0.3;
       position: absolute;
       top: 50vh;
       height: 96px;
@@ -40,7 +39,7 @@ const StyledCarousel = styled(CarouselCmp)`
         background-position: center center;
       }
       :hover {
-        opacity: .7;
+        opacity: 0.7;
       }
     }
 
@@ -70,7 +69,7 @@ const StyledCarousel = styled(CarouselCmp)`
         display: flex;
         transition: all 0.35s ease-in-out;
         height: 100vh;
-        
+
         .slide {
           padding: 16px;
           box-sizing: border-box;
@@ -95,17 +94,26 @@ const StyledAssembly = styled.div`
   img {
     max-height: 80vh;
     max-width: 90vw;
-    box-shadow: 0 0 20px rgba(0,0,0,.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   }
 
   .info {
     display: flex;
     justify-content: space-between;
     margin-top: 16px;
-    .title { font-size: 20px; font-weight: bold; }
-    .serie { font-weight: bold; }
-    .year { font-size: 12px; }
-    .right-side { text-align: right; }
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .serie {
+      font-weight: bold;
+    }
+    .year {
+      font-size: 12px;
+    }
+    .right-side {
+      text-align: right;
+    }
   }
 `;
 
@@ -123,14 +131,12 @@ const Carousel = ({ data, images, returnPage }) => (
         return (
           <StyledAssembly key={idx}>
             <img
-              src={item.path}
+              src={item.image.childImageSharp.original.src}
               alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
             />
             <div className={'info'}>
               <div>
-                {item.title && <div className={'title'}>
-                  {item.title}
-                </div>}
+                {item.title && <div className={'title'}>{item.title}</div>}
                 <div className={'serie'}>
                   {`${data.frontmatter.title} #${idx + 1}`}
                 </div>
@@ -155,4 +161,3 @@ const Carousel = ({ data, images, returnPage }) => (
 );
 
 export default Carousel;
-

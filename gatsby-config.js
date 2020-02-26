@@ -1,6 +1,3 @@
-const srcDir = `${__dirname}/src`;
-const dataDir = `${__dirname}/src/data`;
-
 module.exports = {
   siteMetadata: {
     title: 'Sol Úbeda',
@@ -9,31 +6,28 @@ module.exports = {
     siteUrl: 'https://www.solubeda.net',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
+    '@rhysforyou/gatsby-plugin-react-helmet-async',
     {
       resolve: 'gatsby-plugin-robots-txt',
-      policy: [{ userAgent: '*', allow: '/' }]
+      policy: [{ userAgent: '*', allow: '/' }],
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'images', path: `${srcDir}/images`, },
+      options: { name: 'artwork', path: `${__dirname}/data/artwork` },
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'artwork', path: `${dataDir}/artwork`, },
+      options: { name: 'curriculum', path: `${__dirname}/data/curriculum` },
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'curriculum', path: `${dataDir}/curriculum`, },
+      options: { name: 'exhibitions', path: `${__dirname}/data/exhibitions` },
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'exhibitions', path: `${dataDir}/exhibitions`, },
+      options: { name: 'press', path: `${__dirname}/data/press` },
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: { name: 'press', path: `${dataDir}/press`, },
-    },
+    'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
@@ -55,13 +49,10 @@ module.exports = {
           {
             family: 'Lato',
             subsets: ['latin'],
-          }
+          },
         ],
       },
     },
-    'gatsby-transformer-remark',
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
     'gatsby-plugin-offline',
     'gatsby-plugin-sitemap',
     {

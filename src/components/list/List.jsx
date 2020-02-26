@@ -7,19 +7,12 @@ const StyledList = styled.ul`
   margin: 0 16px;
 `;
 
-const List = (props) => {
-  return (
-    <StyledList>
-      {props.items.map((item, idx) => (
-        <ListItem
-          key={idx}
-          {...item}
-          parseImgFn={props.parseImgFn}
-          onItemClick={props.onItemClick}
-        />
-      ))}
-    </StyledList>
-  );
-};
+const List = ({ items, onItemClick }) => (
+  <StyledList>
+    {items.map((item, idx) => (
+      <ListItem key={idx} {...item} onItemClick={onItemClick} />
+    ))}
+  </StyledList>
+);
 
 export default List;

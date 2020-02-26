@@ -29,7 +29,7 @@ const StyledSlide = styled.div`
             justify-items: center;
             img {
               max-width: 100%;
-              box-shadow: 0 8px 20px rgba(0,0,0,.3);
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             }
           }
         }
@@ -39,11 +39,11 @@ const StyledSlide = styled.div`
 `;
 
 const Slideshow = ({ data, images, returnPage }) => {
-
   const [action, setAction] = useState('idle');
 
-  const totalTime = data.frontmatter.slideshowTime ?
-    data.frontmatter.slideshowTime * 1000 : 3000;
+  const totalTime = data.frontmatter.slideshowTime
+    ? data.frontmatter.slideshowTime * 1000
+    : 3000;
 
   return (
     <>
@@ -67,7 +67,7 @@ const Slideshow = ({ data, images, returnPage }) => {
           {images.map((item, idx) => (
             <div key={idx}>
               <img
-                src={item.path}
+                src={item.image.childImageSharp.original.src}
                 alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
               />
             </div>

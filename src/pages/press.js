@@ -20,8 +20,7 @@ export default ({ data }) => (
           desc: node.html,
         };
       })}
-      parseImgFn={(img) => require(`../data/press/${img}`)}
-      onItemClick={(slug) => {
+      onItemClick={slug => {
         localStorage.setItem('previous', '/press');
         navigate(`/press/${slug}/`);
       }}
@@ -33,10 +32,7 @@ export const query = graphql`
   query {
     allMarkdownRemark(
       filter: { frontmatter: { type: { eq: "press" } } }
-      sort: {
-        fields: [frontmatter___date]
-        order: DESC
-      }
+      sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {
         node {
@@ -46,7 +42,13 @@ export const query = graphql`
             title
             slug
             date(formatString: "DD/MM/YYYY")
-            featured
+            featured {
+              childImageSharp {
+                original {
+                  src
+                }
+              }
+            }
           }
           rawMarkdownBody
           html
