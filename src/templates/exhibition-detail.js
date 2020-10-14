@@ -6,6 +6,7 @@ import Carousel from '../components/artwork/format/Carousel';
 import Video from '../components/artwork/format/Video';
 import Cube from '../components/artwork/format/Cube';
 import Slideshow from '../components/artwork/format/Slideshow';
+import Place from '../components/artwork/format/Place';
 import SEO from '../components/Seo';
 
 const formatMap = {
@@ -13,6 +14,7 @@ const formatMap = {
   video: Video,
   cube: Cube,
   slideshow: Slideshow,
+  place: Place
 };
 
 export default ({ data }) => {
@@ -52,6 +54,13 @@ export const query = graphql`
         year
         technic
         dimensions
+        location {
+          title
+          subtitle
+          address
+          map
+          web
+        }
         images {
           title
           year

@@ -1,0 +1,18 @@
+---
+type: exhibition
+title: De aquí y ahora
+slug: de-aqui-y-ahora
+date: 2020-10-16
+format: place
+featured: featured.jpg
+images:
+  - image: poster.jpg
+location:
+  title: Galería Acanto
+  subtitle: arte y enmarcación
+  address: Calle Javier Sanz, 5, 04004 Almería
+  map: https://goo.gl/maps/ydiUfF6RqSCtgrN37
+  web: https://galeriaacanto.com/
+---
+
+Pintura, obra gráfica, fotografía y escultura.

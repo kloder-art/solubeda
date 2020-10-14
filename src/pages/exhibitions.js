@@ -37,7 +37,7 @@ export const query = graphql`
   query {
     allMarkdownRemark(
       filter: { frontmatter: { type: { eq: "exhibition" } } }
-      sort: { fields: [frontmatter___time], order: DESC }
+      sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {
         node {
