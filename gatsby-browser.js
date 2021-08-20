@@ -1,9 +1,10 @@
+import React from 'react';
+
+import { Layout } from './src/components/Layout';
+
 import './src/styles/reset.scss';
 import './src/styles/fonts.scss';
 import './src/styles/base.scss';
-
-import React from 'react';
-import Layout from './src/components/Layout';
 
 const div = document.createElement('div');
 div.classList.add('loading');

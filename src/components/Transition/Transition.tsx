@@ -6,21 +6,12 @@ import {
 
 const timeout = 150;
 const getTransitionStyles = {
-  entering: {
-    position: 'absolute',
-    opacity: 0,
-  },
-  entered: {
-    transition: `opacity ${timeout}ms ease-in-out`,
-    opacity: 1,
-  },
-  exiting: {
-    transition: `all ${timeout}ms ease-in-out`,
-    opacity: 0,
-  },
+  entering: { position: 'absolute', opacity: 0 },
+  entered: { transition: `opacity ${timeout}ms ease-in-out`, opacity: 1 },
+  exiting: { transition: `all ${timeout}ms ease-in-out`, opacity: 0 },
 };
 
-const Transition = ({ children, animationKey }) => (
+export const Transition = ({ children, animationKey }) => (
   <TransitionGroup>
     <ReactTransition
       key={animationKey}
@@ -32,5 +23,3 @@ const Transition = ({ children, animationKey }) => (
     </ReactTransition>
   </TransitionGroup>
 );
-
-export default Transition;

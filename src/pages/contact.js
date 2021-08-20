@@ -2,7 +2,7 @@ import React from 'react';
 import { SEO } from '../components/SEO';
 import styled from 'styled-components';
 
-import Header from '../components/Header';
+import { Header } from '../components/Header';
 
 const StyledGrid = styled.div`
   display: grid;

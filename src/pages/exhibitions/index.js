@@ -4,8 +4,8 @@ import { navigate } from '@reach/router';
 
 import { store, actions } from '../../state';
 import { SEO } from '../../components/SEO';
-import List from '../../components/list/List';
-import Header from '../../components/Header';
+import { List } from '../../components/List';
+import { Header } from '../../components/Header';
 
 const ExhibitionsPage = ({ data }) => {
   return (

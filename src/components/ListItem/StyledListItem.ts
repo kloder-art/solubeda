@@ -1,12 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const StyledListItem = styled.li`
+export const StyledListItem = styled.li`
   cursor: pointer;
   position: relative;
   height: 200px;
   width: 100%;
-  background-image: url(${(props) => props.imagePath});
+  background-image: url(${({imagePath}) => imagePath});
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -35,17 +34,3 @@ const StyledListItem = styled.li`
   }
   margin-bottom: 32px;
 `;
-
-const ListItem = ({ image, onItemClick, slug, date, title }) => (
-  <StyledListItem
-    imagePath={image.childImageSharp.original.src}
-    onClick={() => onItemClick(slug)}
-  >
-    <div className={'title'}>
-      {date && <div className={'date'}>{date}</div>}
-      {title}
-    </div>
-  </StyledListItem>
-);
-
-export default ListItem;
