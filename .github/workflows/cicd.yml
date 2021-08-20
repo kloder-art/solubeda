@@ -20,8 +20,8 @@ jobs:
     - name: Install
       run: yarn
 
-    - name: Build
-      run: yarn build
+    - name: Test
+      run: yarn test
 
     - name: Gatsby Publish
       if: success()
@@ -29,3 +29,6 @@ jobs:
       with:
         access-token: ${{ secrets.ACCESS_TOKEN }}
         working-dir: ./public
+        commit-message: Deploy
+        git-config-name: Github Gatsby Publish
+        git-config-email: jlopezcur@gmail.com
