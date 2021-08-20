@@ -40,7 +40,7 @@ export default IndexPage;
 export const query = graphql`
   query {
     allMdx(
-      filter: { frontmatter: { type: { eq: "artwork" }, hidden: { eq: null } } }
+      filter: { frontmatter: { variant: { eq: "artworks" }, hidden: { eq: null } } }
       sort: { fields: [frontmatter___time], order: DESC }
     ) {
       edges {
@@ -49,7 +49,7 @@ export const query = graphql`
           frontmatter {
             title
             slug
-            type
+            variant
             format
             hidden
             time

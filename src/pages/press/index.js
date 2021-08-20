@@ -32,14 +32,13 @@ export default PressPage;
 export const query = graphql`
   query {
     allMdx(
-      filter: { frontmatter: { type: { eq: "press" } } }
+      filter: { frontmatter: { variant: { eq: "press" } } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {
         node {
           id
           frontmatter {
-            type
             title
             slug
             date(formatString: "DD/MM/YYYY")

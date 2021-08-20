@@ -13,13 +13,21 @@ const StyledArticle = styled.div`
     font-size: 32px;
     margin-bottom: 16px;
   }
+  h3 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  h4 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
   strong,
   b {
     font-weight: bold;
   }
 
   p {
-    margin: 0 0 8px;
+    margin: 0 0 16px;
   }
 
   li {
@@ -32,7 +40,9 @@ const StyledArticle = styled.div`
   }
 `;
 
-const Article = (props) => <StyledArticle>{props.children}</StyledArticle>;
+export const Article = (props) => (
+  <StyledArticle>{props.children}</StyledArticle>
+);
 
 Article.propTypes = {
   children: PropTypes.node.isRequired,

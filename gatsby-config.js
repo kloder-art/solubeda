@@ -19,10 +19,6 @@ module.exports = {
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'curriculum', path: `${__dirname}/content/curriculum` },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
       options: { name: 'exhibitions', path: `${__dirname}/content/exhibitions` },
     },
     {

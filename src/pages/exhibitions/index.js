@@ -36,7 +36,7 @@ export default ExhibitionsPage;
 export const query = graphql`
   query {
     allMdx(
-      filter: { frontmatter: { type: { eq: "exhibition" } } }
+      filter: { frontmatter: { variant: { eq: "exhibitions" } } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {
@@ -46,7 +46,6 @@ export const query = graphql`
             title
             slug
             date(formatString: "DD/MM/YYYY")
-            type
             format
             time
             year

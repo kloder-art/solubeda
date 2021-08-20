@@ -29,12 +29,11 @@ const ArtworkPage = ({ data: { mdx } }) => {
 export default ArtworkPage;
 
 export const query = graphql`
-  query ($frontmatter__slug: String!) {
-    mdx(frontmatter: { slug: { eq: $frontmatter__slug } }) {
+  query ($id: String) {
+    mdx(id: { eq: $id }) {
       id
       frontmatter {
         title
-        type
         format
         time
         year

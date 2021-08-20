@@ -18,8 +18,8 @@ export default ({ data: { mdx } }) => (
 );
 
 export const query = graphql`
-  query ($frontmatter__slug: String!) {
-    mdx(frontmatter: { slug: { eq: $frontmatter__slug } }) {
+  query ($id: String) {
+    mdx(id: { eq: $id }) {
       id
       frontmatter {
         title

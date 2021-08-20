@@ -83,7 +83,7 @@ const StyledArtworkInfo = styled.div`
 
 const goToDetail = (slug) => {
   store.dispatch(actions.setSidebarVisibility(false));
-  navigate(`/artwork/${slug}/`);
+  navigate(`/artworks/${slug}/`);
 };
 
 const ArtWork = (props) => (
