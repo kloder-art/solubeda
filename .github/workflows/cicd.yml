@@ -28,8 +28,4 @@ jobs:
       uses: enriikke/gatsby-gh-pages-action@v2.2.0
       with:
         access-token: ${{ secrets.ACCESS_TOKEN }}
-        working-dir: ./public
         deploy-branch: gh-pages
-        commit-message: Deploy
-        git-config-name: Github Gatsby Publish
-        git-config-email: jlopezcur@gmail.com
