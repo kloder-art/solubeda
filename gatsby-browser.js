@@ -1,6 +1,6 @@
-import './src/styles/reset.css';
-import './src/styles/fonts.css';
-import './src/styles/base.css';
+import './src/styles/reset.scss';
+import './src/styles/fonts.scss';
+import './src/styles/base.scss';
 
 import React from 'react';
 import Layout from './src/components/Layout';
