@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaMapMarkedAlt, FaCloud } from 'react-icons/fa';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import Close from '../Close';
 
@@ -58,7 +59,7 @@ const Blog = ({ data, images, returnPage }) => {
         </div>
         <div>
           <h2>{data.frontmatter.title}</h2>
-          <div dangerouslySetInnerHTML={{ __html: data.html }} />
+          <MDXRenderer>{data.body}</MDXRenderer>
 
           <StyledLocation>
             <h3>{data.frontmatter.location.title}</h3>

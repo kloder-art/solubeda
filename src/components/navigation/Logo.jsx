@@ -8,21 +8,27 @@ import menuIcon from '../../images/icons/menu.svg';
 const StyledLogo = styled.div`
   display: grid;
   grid-template-columns: auto auto;
-  img { cursor: pointer; }
-  h1 { display: none; }
+  img {
+    cursor: pointer;
+  }
+  h1 {
+    display: none;
+  }
 
   @media (max-width: 920px) {
     img {
       opacity: 0;
       pointer-events: none;
     }
-    ${props => props.showMenu && css`
-      img {
-        pointer-events: all;
-        opacity: 1;
-        filter: invert(1);
-      }
-    `}
+    ${(props) =>
+      props.showMenu &&
+      css`
+        img {
+          pointer-events: all;
+          opacity: 1;
+          filter: invert(1);
+        }
+      `}
   }
 `;
 
@@ -35,7 +41,7 @@ const StyledBtnMenu = styled.div`
   }
   width: 32px;
   height: 32px;
-  box-shadow: 0 0 2px rgba(0,0,0,.1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   background-color: white;
   background-image: url(${menuIcon});
@@ -43,10 +49,12 @@ const StyledBtnMenu = styled.div`
   background-position: center center;
   background-size: 50%;
 
-  ${props => props.showMenu && css`
-    background-color: #cc0000;
-    color: white;
-  `}
+  ${(props) =>
+    props.showMenu &&
+    css`
+      background-color: #cc0000;
+      color: white;
+    `}
 `;
 
 const Logo = (props) => (

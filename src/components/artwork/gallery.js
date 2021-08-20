@@ -11,10 +11,6 @@ const StyledGallery = styled.div`
   grid-auto-flow: dense;
 `;
 
-const Gallery = (props) => (
-  <StyledGallery>
-    {props.children}
-  </StyledGallery>
-);
+const Gallery = (props) => <StyledGallery>{props.children}</StyledGallery>;
 
 export default Gallery;

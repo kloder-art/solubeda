@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SEO from '../components/Seo';
+import { SEO } from '../components/SEO';
 import { graphql } from 'gatsby';
 
 import { store, actions } from '../state';
@@ -9,14 +9,14 @@ import Artwork from '../components/artwork/artwork';
 const IndexPage = ({ data }) => {
   const [selected, setSelected] = useState(null);
 
-  const items = data.allMarkdownRemark.edges.map((item, idx) => (
+  const items = data.allMdx.edges.map((item, idx) => (
     <Artwork
       key={idx}
       // onClick={() => selected === null && setSelected(idx)}
       onClick={() => (selected === null ? setSelected(idx) : setSelected(null))}
       selected={selected === idx}
       selectedMode={selected !== null}
-      html={item.node.html}
+      html={item.node.body}
       {...item.node.frontmatter}
     />
   ));
@@ -39,7 +39,7 @@ export default IndexPage;
 
 export const query = graphql`
   query {
-    allMarkdownRemark(
+    allMdx(
       filter: { frontmatter: { type: { eq: "artwork" }, hidden: { eq: null } } }
       sort: { fields: [frontmatter___time], order: DESC }
     ) {
@@ -78,8 +78,7 @@ export const query = graphql`
               }
             }
           }
-          rawMarkdownBody
-          html
+          body
         }
       }
     }

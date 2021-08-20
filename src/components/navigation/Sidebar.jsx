@@ -18,17 +18,19 @@ const StyledSidebar = styled.nav`
     min-width: 100vw;
     pointer-events: none;
 
-    ${props => props.showMenu && css`
-      pointer-events: all;
-      background-color: rgba(0,0,0,.7);
-    `}
+    ${(props) =>
+      props.showMenu &&
+      css`
+        pointer-events: all;
+        background-color: rgba(0, 0, 0, 0.7);
+      `}
   }
 
   height: 100vh;
   box-sizing: border-box;
   position: absolute;
-  
-  z-index:100;
+
+  z-index: 100;
   flex-direction: column;
   justify-content: space-between;
 `;

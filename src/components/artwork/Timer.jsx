@@ -3,21 +3,26 @@ import styled from 'styled-components';
 
 const StyledTimer = styled.div`
   position: fixed;
-  width: 100vw; height: 4px;
+  width: 100vw;
+  height: 4px;
   @media (man-width: 920px) {
     height: 2px;
   }
-  left: 0; bottom: 0;
+  left: 0;
+  bottom: 0;
   .progress {
-    transition: all ${props => props.timeStep/1000}s;
+    transition: all ${(props) => props.timeStep / 1000}s;
     transition-timing-function: linear;
     height: 100%;
-    width: ${props => props.percentage}%;
+    width: ${(props) => props.percentage}%;
     background: #cc0000;
   }
 `;
 
-let interval = null, time = 0, lastAction = 'idle', unmounted = false;
+let interval = null,
+  time = 0,
+  lastAction = 'idle',
+  unmounted = false;
 
 const Timer = (props) => {
   const [percentage, setPercentage] = useState(0);
@@ -30,9 +35,13 @@ const Timer = (props) => {
       const perc = Math.floor((time * 100) / props.totalTime);
       if (perc >= 100) {
         clearInterval(interval);
-        if (!unmounted) {setPercentage(100);}
+        if (!unmounted) {
+          setPercentage(100);
+        }
       } else {
-        if (!unmounted) {setPercentage(perc);}
+        if (!unmounted) {
+          setPercentage(perc);
+        }
       }
     }, props.timeStep);
   };
@@ -68,9 +77,7 @@ const Timer = (props) => {
 
 Timer.defaultProps = {
   timeStep: 500,
-  totalTime: 3000
+  totalTime: 3000,
 };
 
 export default Timer;
-
-

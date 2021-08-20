@@ -12,13 +12,13 @@ const StyledArtwork = styled.div`
   text-align: center;
 
   @media (min-width: 920px) {
-    grid-row-end: span ${props => (props.spanY ? props.spanY : 1)};
-    grid-column-end: span ${props => (props.spanX ? props.spanX : 1)};
+    grid-row-end: span ${(props) => (props.spanY ? props.spanY : 1)};
+    grid-column-end: span ${(props) => (props.spanX ? props.spanX : 1)};
   }
 
   img {
     max-width: 100%;
-    max-height: ${props => `${(props.spanY ? props.spanY : 1) * 300}px`};
+    max-height: ${(props) => `${(props.spanY ? props.spanY : 1) * 300}px`};
     /* max-height: 300px; */
     transition: box-shadow 0.4s;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -81,12 +81,12 @@ const StyledArtworkInfo = styled.div`
   }
 `;
 
-const goToDetail = slug => {
+const goToDetail = (slug) => {
   store.dispatch(actions.setSidebarVisibility(false));
   navigate(`/artwork/${slug}/`);
 };
 
-const ArtWork = props => (
+const ArtWork = (props) => (
   <StyledArtwork {...props}>
     <img
       src={props.featured.childImageSharp.original.src}

@@ -1,14 +1,14 @@
 import React from 'react';
-import SEO from '../components/Seo';
+import { SEO } from '../components/SEO';
 import { graphql } from 'gatsby';
 
 import Header from '../components/Header';
 import Timeline from '../components/curriculum/Timeline';
 
 const CurriculumPage = ({ data }) => {
-  const intro = data.allMarkdownRemark.edges
+  const intro = data.allMdx.edges
     .filter(item => !item.node.frontmatter.year)[0];
-  const items = data.allMarkdownRemark.edges
+  const items = data.allMdx.edges
     .filter(item => item.node.frontmatter.year);
   return (
     <>
@@ -23,7 +23,7 @@ export default CurriculumPage;
 
 export const query = graphql`
   query {
-    allMarkdownRemark(
+    allMdx(
       filter: { frontmatter: { type: { eq: "curriculum" } } }
       sort: {
         fields: [frontmatter___year]
@@ -37,8 +37,7 @@ export const query = graphql`
             type
             year
           }
-          rawMarkdownBody
-          html
+          body
         }
       }
     }

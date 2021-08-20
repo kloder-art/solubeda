@@ -6,30 +6,61 @@ module.exports = {
     siteUrl: 'https://www.solubeda.net',
   },
   plugins: [
-    '@rhysforyou/gatsby-plugin-react-helmet-async',
+    'gatsby-plugin-sass',
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-robots-txt',
       policy: [{ userAgent: '*', allow: '/' }],
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'artwork', path: `${__dirname}/data/artwork` },
+      options: { name: 'artwork', path: `${__dirname}/content/artwork` },
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'curriculum', path: `${__dirname}/data/curriculum` },
+      options: { name: 'curriculum', path: `${__dirname}/content/curriculum` },
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'exhibitions', path: `${__dirname}/data/exhibitions` },
+      options: { name: 'exhibitions', path: `${__dirname}/content/exhibitions` },
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'press', path: `${__dirname}/data/press` },
+      options: { name: 'press', path: `${__dirname}/content/press` },
     },
-    'gatsby-transformer-remark',
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        plugins: ['gatsby-remark-images', 'gatsby-remark-images-medium-zoom'],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1200,
+              linkImagesToOriginal: false,
+            },
+          },
+          {
+            resolve: 'gatsby-remark-images-medium-zoom',
+            options: {},
+          },
+        ],
+      },
+    },
+    'gatsby-plugin-mdx-embed',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-image',
+    'gatsby-remark-images',
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Lato'],
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -40,17 +71,6 @@ module.exports = {
         theme_color: '#cc0000',
         display: 'fullscreen',
         icon: 'src/images/favicon.png',
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
-      options: {
-        fonts: [
-          {
-            family: 'Lato',
-            subsets: ['latin'],
-          },
-        ],
       },
     },
     'gatsby-plugin-offline',

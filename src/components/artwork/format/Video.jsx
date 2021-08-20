@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import Close from '../Close';
 
@@ -9,13 +10,15 @@ const StyledVideo = styled.div`
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(5, 1fr);
 
-  iframe, object, embed {
+  iframe,
+  object,
+  embed {
     grid-column: 2 / 6;
     grid-row: 2 / 5;
     min-width: 100%;
     min-height: 100%;
     width: 100%;
-    box-shadow: 0 8px 16px rgba(0,0,0,.5)
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -39,24 +42,26 @@ const Video = ({ data, returnPage }) => {
     <>
       <Close url={returnPage} />
       <StyledVideo>
-        <StyledHeader>
-          {data.frontmatter.title}
-        </StyledHeader>
+        <StyledHeader>{data.frontmatter.title}</StyledHeader>
         <iframe
           title={data.frontmatter.title}
-          width={560} height={315}
+          width={560}
+          height={315}
           src={src}
           frameBorder={0}
-          allow={'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'}
+          allow={
+            'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+          }
           allowFullScreen
           autoPlay
           rel={0}
         />
-        <StyledInfo dangerouslySetInnerHTML={{ __html: data.html }} />
+        <StyledInfo>
+          <MDXRenderer>{data.body}</MDXRenderer>
+        </StyledInfo>
       </StyledVideo>
     </>
   );
 };
 
 export default Video;
-

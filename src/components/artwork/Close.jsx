@@ -8,7 +8,8 @@ import { store, actions } from '../../state';
 const StyledCloseButton = styled.div`
   ::before {
     position: absolute;
-    right: 16px; top: 16px;
+    right: 16px;
+    top: 16px;
     width: 32px;
     height: 32px;
     content: ' ';
@@ -20,7 +21,6 @@ const StyledCloseButton = styled.div`
 `;
 
 const Close = ({ url }) => {
-
   const restoreSidebarVisibility = () => {
     store.dispatch(actions.setSidebarVisibility(true));
   };
@@ -28,8 +28,11 @@ const Close = ({ url }) => {
   const goToUrl = () => {
     // Restore the sidebar before jump
     restoreSidebarVisibility();
-    if (url) {navigate(url);}
-    else {navigate('/');}
+    if (url) {
+      navigate(url);
+    } else {
+      navigate('/');
+    }
   };
 
   const onPopState = () => {
@@ -37,7 +40,7 @@ const Close = ({ url }) => {
   };
 
   const onKeyUp = (ev) => {
-    if(ev.key === 'Escape') {
+    if (ev.key === 'Escape') {
       goToUrl();
     }
   };
@@ -51,9 +54,7 @@ const Close = ({ url }) => {
     };
   }, []);
 
-  return (
-    <StyledCloseButton onClick={goToUrl} />
-  );
+  return <StyledCloseButton onClick={goToUrl} />;
 };
 
 export default Close;

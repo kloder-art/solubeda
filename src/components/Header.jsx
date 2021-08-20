@@ -7,11 +7,6 @@ const StyledHeader = styled.h2`
   margin: 0 16px 16px;
 `;
 
-const Header = ({ children }) => (
-  <StyledHeader>
-    {children}
-  </StyledHeader>
-);
+const Header = ({ children }) => <StyledHeader>{children}</StyledHeader>;
 
 export default Header;
-

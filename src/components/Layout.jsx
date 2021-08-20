@@ -11,7 +11,7 @@ import Sidebar from './navigation/Sidebar';
 import Transition from './Transition';
 
 const StyledLayout = styled.div`
-  background: ${props => props.theme.bg};
+  background: ${(props) => props.theme.bg};
   height: 100vh;
   display: flex;
   flex-direction: row;
@@ -22,40 +22,50 @@ const StyledMain = styled.main`
   overflow: hidden;
   overflow-y: auto;
 
-  ${props => props.sidebar && css`
-    padding-top: 32px;
-    @media (max-width: 920px) {
-      /* padding-top: 128px; */
-    }
-  `}
+  ${(props) =>
+    props.sidebar &&
+    css`
+      padding-top: 32px;
+      @media (max-width: 920px) {
+        /* padding-top: 128px; */
+      }
+    `}
 
   @media (min-width: 920px) {
-    width: ${props => !props.sidebar ? '100vw' : 'calc(100vw - 280px)'};
-    margin-left: ${props => !props.sidebar ? '0' : '280px'};
+    width: ${(props) => (!props.sidebar ? '100vw' : 'calc(100vw - 280px)')};
+    margin-left: ${(props) => (!props.sidebar ? '0' : '280px')};
   }
   height: 100vh;
   width: 100%;
   box-sizing: border-box;
 
   /* width */
-  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
   /* Track */
-  ::-webkit-scrollbar-track { background: lightgrey; }
+  ::-webkit-scrollbar-track {
+    background: lightgrey;
+  }
   /* Handle */
-  ::-webkit-scrollbar-thumb { background: grey; }
+  ::-webkit-scrollbar-thumb {
+    background: grey;
+  }
   /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover { background: darkgrey; }
+  ::-webkit-scrollbar-thumb:hover {
+    background: darkgrey;
+  }
 `;
 
 const themes = {
-  'light': light,
-  'dark': dark
+  light: light,
+  dark: dark,
 };
 
 let first = true;
 
-const Layout = ({ children, location, ...rest }) => {
-  if (first && ['artwork', 'exhibition'].includes(rest.pathContext.type)) {
+const Layout = ({ children, location, pageContext }) => {
+  if (first && ['artwork', 'exhibition'].includes(pageContext.type)) {
     store.dispatch(actions.setSidebarVisibility(false));
     first = false;
   }
@@ -67,9 +77,7 @@ const Layout = ({ children, location, ...rest }) => {
         <StyledLayout>
           {sidebar && <Sidebar location={location} />}
           <StyledMain sidebar={sidebar}>
-            <Transition animationKey={location.pathname}>
-              {children}
-            </Transition>
+            <Transition animationKey={location.pathname}>{children}</Transition>
           </StyledMain>
         </StyledLayout>
       </Transition>

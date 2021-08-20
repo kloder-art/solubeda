@@ -13,11 +13,14 @@ const StyledArticle = styled.div`
     font-size: 32px;
     margin-bottom: 16px;
   }
-  strong, b {
+  strong,
+  b {
     font-weight: bold;
   }
 
-  p { margin: 0 0 8px; }
+  p {
+    margin: 0 0 8px;
+  }
 
   li {
     list-style-type: disc;
@@ -29,14 +32,11 @@ const StyledArticle = styled.div`
   }
 `;
 
-const Article = (props) => (
-  <StyledArticle>
-    {props.children}
-  </StyledArticle>
-);
+const Article = (props) => <StyledArticle>{props.children}</StyledArticle>;
 
 Article.propTypes = {
   children: PropTypes.node.isRequired,
+  style: PropTypes.object,
 };
 
 export default Article;

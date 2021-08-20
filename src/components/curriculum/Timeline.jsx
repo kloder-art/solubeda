@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 const StyledTimeline = styled.div`
   margin: 0 16px 16px;
@@ -7,8 +8,12 @@ const StyledTimeline = styled.div`
 `;
 
 const StyledIntro = styled.p`
-  em { font-style: italic; }
-  p { margin-bottom: 16px; }
+  em {
+    font-style: italic;
+  }
+  p {
+    margin-bottom: 16px;
+  }
 `;
 
 const StyledItem = styled.div`
@@ -36,20 +41,19 @@ const Timeline = (props) => {
   return (
     <StyledTimeline>
       {props.intro && (
-        <StyledIntro
-          dangerouslySetInnerHTML={{ __html: props.intro.node.html }}
-        />
+        <StyledIntro>
+          <MDXRenderer>{props.intro.node.body}</MDXRenderer>
+        </StyledIntro>
       )}
       <div className={'timeline-items'}>
         <div className={'ruler'} />
-        {props.items && props.items.map((item, idx) => (
-          <StyledItem key={idx}>
-            <div className={'year'}>{item.node.frontmatter.year}</div>
-            <div className={'content'}
-              dangerouslySetInnerHTML={{ __html: item.node.html}}
-            />
-          </StyledItem>
-        ))}
+        {props.items &&
+          props.items.map((item, idx) => (
+            <StyledItem key={idx}>
+              <div className={'year'}>{item.node.frontmatter.year}</div>
+              <MDXRenderer className={'content'}>{item.node.body}</MDXRenderer>
+            </StyledItem>
+          ))}
       </div>
     </StyledTimeline>
   );

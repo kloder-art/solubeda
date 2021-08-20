@@ -10,6 +10,6 @@ Sol Úbeda Artist Portfolio
 ## Quick start
 
 ```sh
-npm ci
-gatsby develop
+yarn
+yarn start
 ```

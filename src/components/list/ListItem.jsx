@@ -6,7 +6,7 @@ const StyledListItem = styled.li`
   position: relative;
   height: 200px;
   width: 100%;
-  background-image: url(${props => props.imagePath});
+  background-image: url(${(props) => props.imagePath});
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

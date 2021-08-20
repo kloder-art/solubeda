@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SEO from '../components/Seo';
+import { SEO } from '../components/SEO';
 
 const StyledPage = styled.div`
   display: grid;
