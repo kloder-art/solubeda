@@ -7,7 +7,7 @@ import { store, actions } from '../state';
 import light from '../styles/themes/light';
 import dark from '../styles/themes/dark';
 
-import Sidebar from './navigation/Sidebar';
+import { Sidebar } from './Sidebar';
 import Transition from './Transition';
 
 const StyledLayout = styled.div`

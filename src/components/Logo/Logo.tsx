@@ -20,15 +20,13 @@ const StyledLogo = styled.div`
       opacity: 0;
       pointer-events: none;
     }
-    ${(props) =>
-      props.showMenu &&
-      css`
-        img {
-          pointer-events: all;
-          opacity: 1;
-          filter: invert(1);
-        }
-      `}
+    ${(showMenu: boolean) => showMenu && css`
+      img {
+        pointer-events: all;
+        opacity: 1;
+        filter: invert(1);
+      }
+    `}
   }
 `;
 
@@ -49,20 +47,16 @@ const StyledBtnMenu = styled.div`
   background-position: center center;
   background-size: 50%;
 
-  ${(props) =>
-    props.showMenu &&
-    css`
-      background-color: #cc0000;
-      color: white;
-    `}
+  ${({ showMenu }) => showMenu && css`
+    background-color: #cc0000;
+    color: white;
+  `}
 `;
 
-const Logo = (props) => (
-  <StyledLogo showMenu={props.showMenu}>
+export const Logo = ({ showMenu, onClick }) => (
+  <StyledLogo showMenu={showMenu}>
     <img src={sign} alt={'Logo'} onClick={() => navigate('/')} />
     <h1>Sol Úbeda</h1>
-    <StyledBtnMenu showMenu={props.showMenu} onClick={props.onClick} />
+    <StyledBtnMenu showMenu={showMenu} onClick={onClick} />
   </StyledLogo>
 );
-
-export default Logo;

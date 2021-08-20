@@ -1,16 +1,6 @@
-import React from 'react';
 import styled, { css } from 'styled-components';
-import { Link } from 'gatsby';
 
-const items = [
-  { link: '/', text: 'Obras' },
-  { link: '/exhibitions', text: 'Exposiciones' },
-  { link: '/press', text: 'Prensa' },
-  { link: '/curriculum', text: 'Curriculum' },
-  { link: '/contact', text: 'Contacto' },
-];
-
-const StyledMenu = styled.ul`
+export const StyledMenu = styled.ul`
   align-self: flex-start;
   justify-self: center;
 
@@ -54,8 +44,8 @@ const StyledMenu = styled.ul`
     }
   }
 
-  li.active {
-    a {
+  li {
+    a.active {
       color: #cc0000;
       div {
         div {
@@ -69,8 +59,8 @@ const StyledMenu = styled.ul`
   @media (max-width: 920px) {
     pointer-events: none;
     align-self: center;
-    ${(props) =>
-      props.showMenu
+    ${({ showMenu }) =>
+      showMenu
         ? css`
             pointer-events: all;
             li a {
@@ -88,25 +78,3 @@ const StyledMenu = styled.ul`
           `}
   }
 `;
-
-// this.props.location.pathname
-
-const Menu = (props) => (
-  <StyledMenu showMenu={props.showMenu}>
-    {items.map((item, idx) => (
-      <li
-        className={props.location.pathname === item.link ? 'active' : ''}
-        key={idx}
-      >
-        <Link to={item.link} onClick={props.onClick}>
-          <div>
-            <div>{String(idx + 1).padStart(2, '0')}</div>
-            {item.text}
-          </div>
-        </Link>
-      </li>
-    ))}
-  </StyledMenu>
-);
-
-export default Menu;
