@@ -1,8 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyledArticle = styled.div`
+export const StyledArticle = styled.div`
   margin: 0 16px 64px;
   @media (max-width: 920px) {
     margin: 0 16px 64px;
@@ -39,14 +37,3 @@ const StyledArticle = styled.div`
     margin-bottom: 16px;
   }
 `;
-
-export const Article = (props) => (
-  <StyledArticle>{props.children}</StyledArticle>
-);
-
-Article.propTypes = {
-  children: PropTypes.node.isRequired,
-  style: PropTypes.object,
-};
-
-export default Article;

@@ -2,10 +2,10 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-import Article from '../../components/Article';
+import { Article } from '../../components/Article';
 
 export default ({ data: { mdx } }) => (
-  <Article style={{ margin: '0 16px' }}>
+  <Article>
     <h2>{mdx.frontmatter.title}</h2>
     <p>Publicado el {mdx.frontmatter.date}</p>
     <img
