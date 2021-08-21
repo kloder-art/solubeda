@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import { store, actions } from '../../state';
 import Carousel from '../../components/artwork/format/Carousel';
 import Video from '../../components/artwork/format/Video';
-import Cube from '../../components/artwork/format/Cube';
+import { FormatCube } from '../../components/FormatCube';
 import Slideshow from '../../components/artwork/format/Slideshow';
 import Place from '../../components/artwork/format/Place';
 import { SEO } from '../../components/SEO';
@@ -12,7 +12,7 @@ import { SEO } from '../../components/SEO';
 const formatMap = {
   serie: Carousel,
   video: Video,
-  cube: Cube,
+  cube: FormatCube,
   slideshow: Slideshow,
   place: Place,
 };

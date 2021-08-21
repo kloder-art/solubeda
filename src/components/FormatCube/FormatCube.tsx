@@ -1,33 +1,26 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import * as THREE from 'three';
-import OrbitControls from 'orbit-controls-es6';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-import { createCube } from './Cube/cube';
-import { createGuides } from './Cube/guides';
+import { ArtworkClose } from '../ArtworkClose';
 
-import { ArtworkClose } from '../../ArtworkClose';
-
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-`;
+import { createCube } from './cube';
+import { createGuides } from './guides';
+import { StyledContainer } from './StyledContainer';
+import { parse, getLargest } from './dimensions';
 
 let mount = null;
 
-const Cube = ({ data, images, returnPage }) => {
+export const FormatCube = ({ data, images, returnPage }) => {
+  const dimensions = parse(data.frontmatter.dimensions);
+  const maxDimension = getLargest(dimensions);
 
-  // Gets an array with the three box dimensions (width, height, depth)
-  const dimensions = data.frontmatter.dimensions.split('x')
-    .map(x => parseInt(x, 10));
-  
-  // Gets the larger dimension
-  const maxDimension = dimensions.reduce((accumulator=0, currentValue) =>
-    currentValue > accumulator ? currentValue : accumulator
-  );
-
-  let scene, camera, renderer, controls, cube, frameId;
+  let scene: THREE.Scene;
+  let camera: THREE.PerspectiveCamera;
+  let renderer: THREE.WebGLRenderer;
+  let controls: OrbitControls;
+  let cube: THREE.Group;
+  let frameId: number;
 
   const onWindowResize = () => {
     camera.aspect = window.innerWidth / window.innerHeight;
@@ -72,6 +65,7 @@ const Cube = ({ data, images, returnPage }) => {
     mount.appendChild(renderer.domElement);
 
     // Controls
+    // controls = new OrbitControls(camera, renderer.domElement);
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = true;
     controls.maxDistance = 1500;
@@ -91,17 +85,16 @@ const Cube = ({ data, images, returnPage }) => {
     return () => {
       window.removeEventListener('resize', onWindowResize, false);
       stop();
-      if (mount) {mount.removeChild(renderer.domElement);}
+      if (mount) {
+        mount.removeChild(renderer.domElement);
+      }
     };
   }, []);
-  
+
   return (
     <>
       <ArtworkClose url={returnPage} />
-      <StyledContainer ref={m => mount = m} />
+      <StyledContainer ref={(m: boolean) => (mount = m)} />
     </>
   );
 };
-
-export default Cube;
-

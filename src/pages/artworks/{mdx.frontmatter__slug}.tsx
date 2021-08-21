@@ -3,13 +3,13 @@ import { graphql } from 'gatsby';
 
 import Carousel from '../../components/artwork/format/Carousel';
 import Video from '../../components/artwork/format/Video';
-import Cube from '../../components/artwork/format/Cube';
+import { FormatCube } from '../../components/FormatCube';
 import Cam from '../../components/artwork/format/Cam';
 
 const formatMap = {
   serie: Carousel,
   video: Video,
-  cube: Cube,
+  cube: FormatCube,
   cam: Cam,
 };
 

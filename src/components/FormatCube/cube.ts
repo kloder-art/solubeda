@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 
-const createMaterial = images => {
-  return images.map(image => {
+const createMaterial = (images: Array<any>) => {
+  return images.map((image) => {
     if (image === null) {
       return false;
     }
     const tex = new THREE.TextureLoader().load(
-      image.image.childImageSharp.original.src
+      image.image.childImageSharp.gatsbyImageData.images.fallback.src
     );
     return new THREE.MeshBasicMaterial({
       transparent: true,
@@ -19,7 +19,10 @@ const createMaterial = images => {
   });
 };
 
-export function createCube([w, h, d], images) {
+export function createCube(
+  [w, h, d]: Array<number>,
+  images: Array<any>
+): THREE.Group {
   const materials = createMaterial(images);
   const group = new THREE.Group();
 
