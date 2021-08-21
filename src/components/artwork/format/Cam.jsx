@@ -21,7 +21,7 @@ const ImageHolder = styled.div`
   height: 100vh;
   background: rgba(0,0,0,.2);
 
-  img {
+  .gatsby-image-wrapper {
     max-height: 80vh;
     max-width: 90vw;
     box-shadow: 0 0 20px rgba(0,0,0,.5);
