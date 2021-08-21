@@ -3,23 +3,11 @@ import { SEO } from '../components/SEO';
 import { graphql } from 'gatsby';
 
 import { store, actions } from '../state';
-import Gallery from '../components/artwork/gallery';
-import Artwork from '../components/artwork/artwork';
+import { Gallery } from '../components/Gallery';
+import { Artwork } from '../components/Artwork';
 
 const IndexPage = ({ data }) => {
   const [selected, setSelected] = useState(null);
-
-  const items = data.allMdx.edges.map((item, idx) => (
-    <Artwork
-      key={idx}
-      // onClick={() => selected === null && setSelected(idx)}
-      onClick={() => (selected === null ? setSelected(idx) : setSelected(null))}
-      selected={selected === idx}
-      selectedMode={selected !== null}
-      html={item.node.body}
-      {...item.node.frontmatter}
-    />
-  ));
 
   useEffect(() => {
     store.dispatch(actions.setSidebarVisibility(true));
@@ -27,9 +15,21 @@ const IndexPage = ({ data }) => {
 
   return (
     <>
-      <SEO title="Inicio" keywords={['sol', 'ubeda', 'art', 'almería']} />
+      <SEO title={'Inicio'} keywords={['sol', 'ubeda', 'art', 'almería']} />
       <Gallery breakpointCols={selected === null ? 3 : 1} selected={selected}>
-        {items}
+        {data.allMdx.edges.map(({ node: { id, frontmatter } }) => (
+          <Artwork
+            key={id}
+            spanX={frontmatter.spanX}
+            spanY={frontmatter.spanY}
+            featured={frontmatter.featured}
+            title={frontmatter.title}
+            slug={frontmatter.slug}
+            images={frontmatter.images}
+            format={frontmatter.format}
+            year={frontmatter.year}
+          />
+        ))}
       </Gallery>
     </>
   );
@@ -51,31 +51,22 @@ export const query = graphql`
             slug
             variant
             format
-            hidden
             time
             year
             technic
             dimensions
             featured {
               childImageSharp {
-                original {
-                  src
-                }
+                gatsbyImageData(
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
               }
             }
             spanX
             spanY
             images {
               title
-              year
-              dimensions
-              image {
-                childImageSharp {
-                  original {
-                    src
-                  }
-                }
-              }
             }
           }
           body

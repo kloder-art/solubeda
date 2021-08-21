@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaMapMarkedAlt, FaCloud } from 'react-icons/fa';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import Close from '../Close';
+import { ArtworkClose } from '../../ArtworkClose';
 
 const StyledPlace = styled.div`
   max-width: 980px;
@@ -45,7 +46,7 @@ const StyledLocation = styled.div`
 const Blog = ({ data, images, returnPage }) => {
   return (
     <>
-      <Close url={returnPage} />
+      <ArtworkClose url={returnPage} />
       <StyledPlace>
         <div>
           {images.map((item, idx) => (
@@ -53,6 +54,11 @@ const Blog = ({ data, images, returnPage }) => {
               <img
                 src={item.image.childImageSharp.original.src}
                 alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
+              />
+              <GatsbyImage
+                image={getImage(item.image)}
+                alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
+                objectFit={'contain'}
               />
             </div>
           ))}

@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import Close from '../Close';
+import { ArtworkClose } from '../../ArtworkClose';
 
 const StyledCam = styled.video`
   position: absolute;
@@ -45,7 +46,7 @@ const Cam = ({ data, images, returnPage }) => {
         }).then((stream) => {
           camStream = stream;
           cam.srcObject = camStream;
-          cam.onloadedmetadata = (e) => cam.play();
+          cam.onloadedmetadata = () => cam.play();
           status.enter = false;
         }).catch((err) => {
           console.error('getUserMedia() error', err);
@@ -68,11 +69,11 @@ const Cam = ({ data, images, returnPage }) => {
   const image = images[0];
   return (
     <>
-      <Close url={returnPage} />
+      <ArtworkClose url={returnPage} />
       <StyledCam autoplay={'true'} ref={camRef} />
       <ImageHolder>
-        <img
-          src={image.path}
+        <GatsbyImage
+          image={getImage(image.image)}
           alt={image.title || data.frontmatter.title}
         />
       </ImageHolder>
@@ -81,4 +82,3 @@ const Cam = ({ data, images, returnPage }) => {
 };
 
 export default Cam;
-

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
 import styled from 'styled-components';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-import Close from '../Close';
-import Timer from '../Timer';
+import { ArtworkClose } from '../../ArtworkClose';
+import { Timer } from '../../Timer';
 
 const StyledSlide = styled.div`
   height: 100vh;
@@ -47,7 +48,7 @@ const Slideshow = ({ data, images, returnPage }) => {
 
   return (
     <>
-      <Close url={returnPage} />
+      <ArtworkClose url={returnPage} />
       <StyledSlide>
         <Slider
           onInit={() => setAction('start')}
@@ -66,9 +67,10 @@ const Slideshow = ({ data, images, returnPage }) => {
         >
           {images.map((item, idx) => (
             <div key={idx}>
-              <img
-                src={item.image.childImageSharp.original.src}
+              <GatsbyImage
+                image={getImage(item.image)}
                 alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
+                objectFit={'contain'}
               />
             </div>
           ))}

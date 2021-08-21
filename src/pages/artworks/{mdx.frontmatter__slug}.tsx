@@ -46,9 +46,10 @@ export const query = graphql`
           dimensions
           image {
             childImageSharp {
-              original {
-                src
-              }
+              gatsbyImageData(
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
         }

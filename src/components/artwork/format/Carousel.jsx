@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Carousel as CarouselCmp } from 'react-responsive-carousel';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 import arrowRightIcon from '../../../images/icons/arrow-right.svg';
-import Close from '../Close';
+import { ArtworkClose } from '../../ArtworkClose';
 
 const StyledCarousel = styled(CarouselCmp)`
   position: relative;
@@ -119,7 +120,7 @@ const StyledAssembly = styled.div`
 
 const Carousel = ({ data, images, returnPage }) => (
   <>
-    <Close url={returnPage} />
+    <ArtworkClose url={returnPage} />
     <StyledCarousel
       showArrows={true}
       showStatus={false}
@@ -130,9 +131,10 @@ const Carousel = ({ data, images, returnPage }) => (
       {images.map((item, idx) => {
         return (
           <StyledAssembly key={idx}>
-            <img
-              src={item.image.childImageSharp.original.src}
+            <GatsbyImage
+              image={getImage(item.image)}
               alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
+              objectFit={'contain'}
             />
             <div className={'info'}>
               <div>

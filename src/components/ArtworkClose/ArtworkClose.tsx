@@ -1,26 +1,10 @@
 import React, { useEffect } from 'react';
 import { navigate } from 'gatsby';
-import styled from 'styled-components';
-
-import closeIcon from '../../images/icons/close.svg';
 import { store, actions } from '../../state';
 
-const StyledCloseButton = styled.div`
-  ::before {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    width: 32px;
-    height: 32px;
-    content: ' ';
-    cursor: pointer;
-    z-index: 10;
-    background-image: url(${closeIcon});
-    background-size: contain;
-  }
-`;
+import { StyledArtworkClose } from './StyledArtworkClose';
 
-const Close = ({ url }) => {
+export const ArtworkClose = ({ url }) => {
   const restoreSidebarVisibility = () => {
     store.dispatch(actions.setSidebarVisibility(true));
   };
@@ -54,7 +38,5 @@ const Close = ({ url }) => {
     };
   }, []);
 
-  return <StyledCloseButton onClick={goToUrl} />;
+  return <StyledArtworkClose onClick={goToUrl} />;
 };
-
-export default Close;

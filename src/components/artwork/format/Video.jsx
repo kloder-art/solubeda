@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
-import Close from '../Close';
+import { ArtworkClose } from '../../ArtworkClose';
 
 const StyledVideo = styled.div`
   display: grid;
@@ -40,7 +40,7 @@ const Video = ({ data, returnPage }) => {
   const src = `https://www.youtube.com/embed/${data.frontmatter.video}`;
   return (
     <>
-      <Close url={returnPage} />
+      <ArtworkClose url={returnPage} />
       <StyledVideo>
         <StyledHeader>{data.frontmatter.title}</StyledHeader>
         <iframe

@@ -6,7 +6,7 @@ import OrbitControls from 'orbit-controls-es6';
 import { createCube } from './Cube/cube';
 import { createGuides } from './Cube/guides';
 
-import Close from '../Close';
+import { ArtworkClose } from '../../ArtworkClose';
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -97,7 +97,7 @@ const Cube = ({ data, images, returnPage }) => {
   
   return (
     <>
-      <Close url={returnPage} />
+      <ArtworkClose url={returnPage} />
       <StyledContainer ref={m => mount = m} />
     </>
   );
