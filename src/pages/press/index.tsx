@@ -19,7 +19,7 @@ const PressPage = ({ data: { allMdx } }) => (
           slug: node.frontmatter.slug,
         };
       })}
-      onItemClick={(slug) => {
+      onItemClick={(slug: string) => {
         localStorage.setItem('previous', '/press');
         navigate(`/press/${slug}/`);
       }}
@@ -44,9 +44,10 @@ export const query = graphql`
             date(formatString: "DD/MM/YYYY")
             featured {
               childImageSharp {
-                original {
-                  src
-                }
+                gatsbyImageData(
+                  placeholder: TRACED_SVG
+                  formats: [AUTO, WEBP, AVIF]
+                )
               }
             }
           }

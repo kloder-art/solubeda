@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { SEO } from '../components/SEO';
 import { graphql } from 'gatsby';
 
@@ -7,8 +7,6 @@ import { Gallery } from '../components/Gallery';
 import { Artwork } from '../components/Artwork';
 
 const IndexPage = ({ data }) => {
-  const [selected, setSelected] = useState(null);
-
   useEffect(() => {
     store.dispatch(actions.setSidebarVisibility(true));
   }, []);
@@ -16,7 +14,7 @@ const IndexPage = ({ data }) => {
   return (
     <>
       <SEO title={'Inicio'} keywords={['sol', 'ubeda', 'art', 'almería']} />
-      <Gallery breakpointCols={selected === null ? 3 : 1} selected={selected}>
+      <Gallery>
         {data.allMdx.edges.map(({ node: { id, frontmatter } }) => (
           <Artwork
             key={id}
@@ -40,7 +38,9 @@ export default IndexPage;
 export const query = graphql`
   query {
     allMdx(
-      filter: { frontmatter: { variant: { eq: "artworks" }, hidden: { eq: null } } }
+      filter: {
+        frontmatter: { variant: { eq: "artworks" }, hidden: { eq: null } }
+      }
       sort: { fields: [frontmatter___time], order: DESC }
     ) {
       edges {
@@ -58,7 +58,7 @@ export const query = graphql`
             featured {
               childImageSharp {
                 gatsbyImageData(
-                  placeholder: BLURRED
+                  placeholder: TRACED_SVG
                   formats: [AUTO, WEBP, AVIF]
                 )
               }

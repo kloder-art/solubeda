@@ -1,16 +1,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Carousel from '../../components/artwork/format/Carousel';
-import Video from '../../components/artwork/format/Video';
+import { FormatCarousel } from '../../components/FormatCarousel';
+import { FormatVideo } from '../../components/FormatVideo';
 import { FormatCube } from '../../components/FormatCube';
-import Cam from '../../components/artwork/format/Cam';
+import { FormatCam } from '../../components/FormatCam';
 
 const formatMap = {
-  serie: Carousel,
-  video: Video,
+  serie: FormatCarousel,
+  video: FormatVideo,
   cube: FormatCube,
-  cam: Cam,
+  cam: FormatCam,
 };
 
 const ArtworkPage = ({ data: { mdx } }) => {
@@ -47,7 +47,7 @@ export const query = graphql`
           image {
             childImageSharp {
               gatsbyImageData(
-                placeholder: BLURRED
+                placeholder: TRACED_SVG
                 formats: [AUTO, WEBP, AVIF]
               )
             }

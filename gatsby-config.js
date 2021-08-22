@@ -19,7 +19,10 @@ module.exports = {
     },
     {
       resolve: 'gatsby-source-filesystem',
-      options: { name: 'exhibitions', path: `${__dirname}/content/exhibitions` },
+      options: {
+        name: 'exhibitions',
+        path: `${__dirname}/content/exhibitions`,
+      },
     },
     {
       resolve: 'gatsby-source-filesystem',
@@ -81,6 +84,14 @@ module.exports = {
         sampleRate: 5,
         siteSpeedSampleRate: 10,
         cookieDomain: 'solubeda.net',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-typescript`,
+      options: {
+        isTSX: true,
+        jsxPragma: `jsx`, // defaults to "React"
+        allExtensions: true,
       },
     },
   ],

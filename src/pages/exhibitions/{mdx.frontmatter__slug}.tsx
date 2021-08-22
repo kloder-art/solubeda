@@ -2,19 +2,19 @@ import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
 
 import { store, actions } from '../../state';
-import Carousel from '../../components/artwork/format/Carousel';
-import Video from '../../components/artwork/format/Video';
+import { FormatCarousel } from '../../components/FormatCarousel';
+import { FormatVideo } from '../../components/FormatVideo';
 import { FormatCube } from '../../components/FormatCube';
-import Slideshow from '../../components/artwork/format/Slideshow';
-import Place from '../../components/artwork/format/Place';
+import { FormatSlideshow } from '../../components/FormatSlideshow';
+import { FormatPlace } from '../../components/FormatPlace';
 import { SEO } from '../../components/SEO';
 
 const formatMap = {
-  serie: Carousel,
-  video: Video,
+  serie: FormatCarousel,
+  video: FormatVideo,
   cube: FormatCube,
-  slideshow: Slideshow,
-  place: Place,
+  slideshow: FormatSlideshow,
+  place: FormatPlace,
 };
 
 export default ({ data: { mdx } }) => {
@@ -65,12 +65,10 @@ export const query = graphql`
           dimensions
           image {
             childImageSharp {
-              fluid(maxWidth: 1080) {
-                ...GatsbyImageSharpFluid
-              }
-              original {
-                src
-              }
+              gatsbyImageData(
+                placeholder: TRACED_SVG
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
         }

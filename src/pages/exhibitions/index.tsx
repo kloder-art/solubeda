@@ -22,7 +22,7 @@ const ExhibitionsPage = ({ data }) => {
             desc: node.body,
           };
         })}
-        onItemClick={slug => {
+        onItemClick={(slug: string) => {
           store.dispatch(actions.setSidebarVisibility(false));
           navigate(`/exhibitions/${slug}/`);
         }}
@@ -47,29 +47,12 @@ export const query = graphql`
             slug
             date(formatString: "DD/MM/YYYY")
             format
-            time
-            year
-            technic
-            dimensions
             featured {
               childImageSharp {
-                original {
-                  src
-                }
-              }
-            }
-            spanX
-            spanY
-            images {
-              title
-              year
-              dimensions
-              image {
-                childImageSharp {
-                  original {
-                    src
-                  }
-                }
+                gatsbyImageData(
+                  placeholder: TRACED_SVG
+                  formats: [AUTO, WEBP, AVIF]
+                )
               }
             }
           }
