@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 export const StyledMenu = styled.ul`
   align-self: flex-start;
   justify-self: center;
+  margin-top: 32px;
 
   li {
     padding: 8px 0;
