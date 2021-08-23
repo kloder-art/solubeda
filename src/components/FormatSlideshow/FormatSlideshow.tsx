@@ -33,7 +33,7 @@ export const FormatSlideshow = ({ data, images, returnPage }) => {
           slidesToShow={1}
           slidesToScroll={1}
         >
-          {images.map((item, idx) => (
+          {images.map((item: any, idx: number) => (
             <div key={idx}>
               <GatsbyImage
                 image={getImage(item.image)}

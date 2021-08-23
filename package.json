@@ -5,7 +5,6 @@
   "version": "0.1.0",
   "author": "Javier López Úbeda <jlopezcur@gmail.com>",
   "dependencies": {
-    "react-responsive-carousel": "^3.2.21",
     "react-slick": "^0.28.1",
     "react-transition-group": "^4.4.2",
     "redux": "^4.1.1",

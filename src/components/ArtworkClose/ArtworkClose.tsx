@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { navigate } from 'gatsby';
 import { store, actions } from '../../state';
+import { VscClose } from 'react-icons/vsc';
 
 import { StyledArtworkClose } from './StyledArtworkClose';
 
@@ -23,7 +24,7 @@ export const ArtworkClose = ({ url }) => {
     restoreSidebarVisibility();
   };
 
-  const onKeyUp = (ev) => {
+  const onKeyUp = (ev: KeyboardEvent) => {
     if (ev.key === 'Escape') {
       goToUrl();
     }
@@ -38,5 +39,9 @@ export const ArtworkClose = ({ url }) => {
     };
   }, []);
 
-  return <StyledArtworkClose onClick={goToUrl} />;
+  return (
+    <StyledArtworkClose onClick={goToUrl} href={'javascript:void(0);'}>
+      <VscClose size={56} />
+    </StyledArtworkClose>
+  );
 };
