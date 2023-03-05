@@ -29,7 +29,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.4",
     "gatsby-remark-images": "^5.9.0",
     "gatsby-remark-images-medium-zoom": "^1.7.0",
-    "gatsby-source-filesystem": "^3.12.0",
+    "gatsby-source-filesystem": "^5.7.0",
     "gatsby-transformer-sharp": "^3.12.0",
     "markdown-loader": "^6.0.0",
     "mdx-embed": "^0.0.19",
