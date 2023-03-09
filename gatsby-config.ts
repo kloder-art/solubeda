@@ -17,7 +17,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: { name: 'artwork', path: `${__dirname}/content/artwork` },
-      __key: 'artwor',
+      __key: 'artwork',
     },
     {
       resolve: 'gatsby-source-filesystem',
