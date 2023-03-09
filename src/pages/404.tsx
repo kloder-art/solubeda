@@ -1,15 +1,14 @@
-import React from 'react';
+import * as React from 'react';
+import { PageProps } from 'gatsby';
 import styled from 'styled-components';
 
-import { SEO } from '../components/SEO';
+import { Layout, SEO } from '../components';
 
 const StyledPage = styled.div`
   display: grid;
   text-align: center;
-  
   width: 100%;
   height: 100%;
-  
   div.content {
     padding: 60px 18px;
     h1 {
@@ -19,8 +18,8 @@ const StyledPage = styled.div`
   }
 `;
 
-const NotFoundPage = () => (
-  <>
+const NotFoundPage: React.FC<PageProps> = () => (
+  <Layout>
     <SEO title="404: Not found" />
     <StyledPage>
       <div className={'content'}>
@@ -28,8 +27,7 @@ const NotFoundPage = () => (
         <p>Lo sentimos, no hemos podido encontrar la página que buscas.</p>
       </div>
     </StyledPage>
-  </>
+  </Layout>
 );
 
 export default NotFoundPage;
-

@@ -1,31 +1,51 @@
-import React, { useEffect } from 'react';
-import { graphql } from 'gatsby';
+import * as React from 'react';
+import { graphql, PageProps } from 'gatsby';
 
-import { store, actions } from '../../state';
-import { FormatCarousel } from '../../components/FormatCarousel';
-import { FormatVideo } from '../../components/FormatVideo';
-import { FormatCube } from '../../components/FormatCube';
-import { FormatSlideshow } from '../../components/FormatSlideshow';
-import { FormatPlace } from '../../components/FormatPlace';
-import { SEO } from '../../components/SEO';
+import {
+  FormatCarousel,
+  FormatVideo,
+  FormatCube,
+  FormatSlideshow,
+  FormatPlace,
+  SEO,
+} from '../../components';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 const formatMap = {
-  serie: FormatCarousel,
-  video: FormatVideo,
-  cube: FormatCube,
   slideshow: FormatSlideshow,
   place: FormatPlace,
 };
 
-export default ({ data: { mdx } }) => {
+type Payload = {
+  data: {
+    mdx: {
+      frontmatter: {
+        format: 'slideshow' | 'place';
+        title: string;
+        technic: string;
+        dimensions: string;
+        year: string;
+        video: string;
+        slideshowTime: number;
+        images: { image: IGatsbyImageData }[];
+        location: {
+          title: string;
+          subtitle: string;
+          map: string;
+          address: string;
+          web: string;
+        };
+      };
+      body: string;
+    };
+  };
+};
+
+const ExhibitionPage: React.FC<PageProps & Payload> = ({ data: { mdx } }) => {
   const Cmp = formatMap[mdx.frontmatter.format];
   if (!Cmp) {
     console.error('Undefined format o unknown format for this artwork.');
   }
-
-  useEffect(() => {
-    store.dispatch(actions.setSidebarVisibility(false));
-  }, []);
 
   return (
     <>
@@ -40,6 +60,8 @@ export default ({ data: { mdx } }) => {
     </>
   );
 };
+
+export default ExhibitionPage;
 
 export const query = graphql`
   query ($id: String) {
@@ -66,7 +88,7 @@ export const query = graphql`
           image {
             childImageSharp {
               gatsbyImageData(
-                placeholder: TRACED_SVG
+                placeholder: DOMINANT_COLOR
                 formats: [AUTO, WEBP, AVIF]
               )
             }

@@ -1,13 +1,28 @@
-import React from 'react';
-import { graphql } from 'gatsby';
+import * as React from 'react';
+import { graphql, PageProps } from 'gatsby';
 import { navigate } from '@reach/router';
 
-import { SEO } from '../../components/SEO';
-import { List } from '../../components/List';
-import { Header } from '../../components/Header';
+import { SEO, List, Header, Layout } from '../../components';
 
-const PressPage = ({ data: { allMdx } }) => (
-  <>
+type Data = {
+  allMdx: {
+    edges: {
+      node: {
+        frontmatter: {
+          title: string;
+          date: string;
+          featured: string;
+          slug: string;
+        };
+      };
+    }[];
+  };
+};
+
+const PressPage: React.FC<PageProps & { data: Data }> = ({
+  data: { allMdx },
+}) => (
+  <Layout>
     <SEO title="Prensa" />
     <Header>Prensa</Header>
     <List
@@ -24,7 +39,7 @@ const PressPage = ({ data: { allMdx } }) => (
         navigate(`/press/${slug}/`);
       }}
     />
-  </>
+  </Layout>
 );
 
 export default PressPage;
@@ -33,7 +48,7 @@ export const query = graphql`
   query {
     allMdx(
       filter: { frontmatter: { variant: { eq: "press" } } }
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
     ) {
       edges {
         node {
@@ -45,7 +60,7 @@ export const query = graphql`
             featured {
               childImageSharp {
                 gatsbyImageData(
-                  placeholder: TRACED_SVG
+                  placeholder: DOMINANT_COLOR
                   formats: [AUTO, WEBP, AVIF]
                 )
               }

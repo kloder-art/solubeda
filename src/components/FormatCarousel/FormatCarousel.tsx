@@ -1,5 +1,5 @@
-import React from 'react';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import * as React from 'react';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import Slider from 'react-slick';
 
 import { ArtworkClose } from '../ArtworkClose';
@@ -7,7 +7,24 @@ import { ArtworkClose } from '../ArtworkClose';
 import { Arrow } from './Arrow';
 import { StyledCarousel } from './StyledCarousel';
 
-export const FormatCarousel = ({ data, images, returnPage }) => (
+type FormatCarouselProps = {
+  data: {
+    frontmatter: {
+      title: string;
+      technic: string;
+      dimensions: string;
+      year: string;
+    };
+  };
+  images: { image: IGatsbyImageData }[];
+  returnPage: string;
+};
+
+export const FormatCarousel: React.FC<FormatCarouselProps> = ({
+  data,
+  images,
+  returnPage,
+}) => (
   <>
     <ArtworkClose url={returnPage} />
     <StyledCarousel>
@@ -19,7 +36,7 @@ export const FormatCarousel = ({ data, images, returnPage }) => (
           <div key={idx}>
             <div className={'slick-content'}>
               <GatsbyImage
-                image={getImage(item.image)}
+                image={getImage(item.image) as IGatsbyImageData}
                 alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
                 objectFit={'contain'}
               />

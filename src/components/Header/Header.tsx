@@ -1,5 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 
 import { StyledHeader } from './StyledHeader';
 
-export const Header = ({ children }) => <StyledHeader>{children}</StyledHeader>;
+type HeaderProps = {
+  children: React.ReactNode;
+};
+
+export const Header: React.FC<HeaderProps> = ({ children }) => (
+  <StyledHeader>{children}</StyledHeader>
+);

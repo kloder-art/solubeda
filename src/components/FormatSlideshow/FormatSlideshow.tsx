@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import Slider from 'react-slick';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 
 import { ArtworkClose } from '../ArtworkClose';
-import { Timer } from '../Timer';
-
+import { Action, Timer } from '../Timer';
 import { StyledSlide } from './StyledSlide';
 
-export const FormatSlideshow = ({ data, images, returnPage }) => {
-  const [action, setAction] = useState('idle');
+type FormatSlideshowProps = {
+  data: { frontmatter: { slideshowTime: number; title: string } };
+  images: { image: IGatsbyImageData }[];
+  returnPage: string;
+};
+
+export const FormatSlideshow: React.FC<FormatSlideshowProps> = ({
+  data,
+  images,
+  returnPage,
+}) => {
+  const [action, setAction] = React.useState<Action>('idle');
 
   const totalTime = data.frontmatter.slideshowTime
     ? data.frontmatter.slideshowTime * 1000
@@ -26,7 +35,6 @@ export const FormatSlideshow = ({ data, images, returnPage }) => {
           arrows={false}
           infinite={true}
           pauseOnHover={false}
-          lazyLoad={true}
           speed={300}
           autoplay={true}
           autoplaySpeed={totalTime}
@@ -36,7 +44,7 @@ export const FormatSlideshow = ({ data, images, returnPage }) => {
           {images.map((item: any, idx: number) => (
             <div key={idx}>
               <GatsbyImage
-                image={getImage(item.image)}
+                image={getImage(item.image) as IGatsbyImageData}
                 alt={item.title || `${data.frontmatter.title} #${idx + 1}`}
                 objectFit={'contain'}
               />

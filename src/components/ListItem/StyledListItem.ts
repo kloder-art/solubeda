@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
-export const StyledListItem = styled.li`
+type StyledListItemProps = {
+  imagePath: string;
+};
+
+export const StyledListItem = styled.li<StyledListItemProps>`
   cursor: pointer;
   position: relative;
   height: 200px;
   width: 100%;
-  background-image: url(${({imagePath}) => imagePath});
+  background-image: url(${({ imagePath }) => imagePath});
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

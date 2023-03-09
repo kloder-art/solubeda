@@ -1,35 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import { store, actions } from '../../state';
-
-import { Sidebar } from '../Sidebar';
-import { Transition } from '../Transition';
+import * as React from 'react';
 
 import { StyledLayout } from './StyledLayout';
 import { StyledMain } from './StyledMain';
+import { Sidebar } from '../Sidebar';
 
-let first = true;
-
-export const Layout = ({ children, location, pageContext }) => {
-  if (first && ['artwork', 'exhibition'].includes(pageContext.type)) {
-    store.dispatch(actions.setSidebarVisibility(false));
-    first = false;
-  }
-
-  const { sidebar } = store.getState();
-  return (
-    <Transition animationKey={sidebar}>
-      <StyledLayout>
-        {sidebar && <Sidebar />}
-        <StyledMain sidebar={sidebar}>
-          <Transition animationKey={location.pathname}>{children}</Transition>
-        </StyledMain>
-      </StyledLayout>
-    </Transition>
-  );
+type LayoutProps = {
+  children: React.ReactNode;
+  withSidebar?: boolean;
 };
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+export const Layout: React.FC<LayoutProps> = ({
+  children,
+  withSidebar = true,
+}) => {
+  return (
+    <StyledLayout>
+      {withSidebar && <Sidebar />}
+      <StyledMain sidebar={withSidebar}>{children}</StyledMain>
+    </StyledLayout>
+  );
 };

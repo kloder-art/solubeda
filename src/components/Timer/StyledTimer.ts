@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const StyledTimer = styled.div`
+type StyledTimerProps = {
+  timeStep: number;
+  percentage: number;
+};
+
+export const StyledTimer = styled.div<StyledTimerProps>`
   position: fixed;
   width: 100vw;
   height: 4px;
@@ -13,7 +18,7 @@ export const StyledTimer = styled.div`
     transition: all ${({ timeStep }) => timeStep / 1000}s;
     transition-timing-function: linear;
     height: 100%;
-    width: ${({percentage}) => percentage}%;
+    width: ${({ percentage }) => percentage}%;
     background: #cc0000;
   }
 `;

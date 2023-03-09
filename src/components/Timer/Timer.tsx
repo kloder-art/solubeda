@@ -1,11 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 
 import { StyledTimer } from './StyledTimer';
 
-let interval = null, lastAction = 'idle', unmounted = false;
+let interval: NodeJS.Timer,
+  lastAction = 'idle',
+  unmounted = false;
 
-export const Timer = ({ timeStep = 500, totalTime = 3000, action }) => {
-  const [percentage, setPercentage] = useState(0);
+export type Action = 'start' | 'reset' | 'idle';
+
+type TimerProps = {
+  timeStep?: number;
+  totalTime?: number;
+  action?: Action;
+};
+
+export const Timer: React.FC<TimerProps> = ({
+  timeStep = 500,
+  totalTime = 3000,
+  action = 'idle',
+}) => {
+  const [percentage, setPercentage] = React.useState(0);
 
   const startTimer = () => {
     let time = 0;
@@ -40,7 +54,7 @@ export const Timer = ({ timeStep = 500, totalTime = 3000, action }) => {
     lastAction = action;
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     unmounted = false;
     return () => {
       unmounted = true;

@@ -1,46 +1,37 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
 import { navigate } from 'gatsby';
-import { store, actions } from '../../state';
 import { VscClose } from 'react-icons/vsc';
 
 import { StyledArtworkClose } from './StyledArtworkClose';
 
-export const ArtworkClose = ({ url }) => {
-  const restoreSidebarVisibility = () => {
-    store.dispatch(actions.setSidebarVisibility(true));
-  };
+type ArtworkCloseProps = {
+  url: string;
+};
 
-  const goToUrl = () => {
-    // Restore the sidebar before jump
-    restoreSidebarVisibility();
+export const ArtworkClose: React.FC<ArtworkCloseProps> = ({ url }) => {
+  const goToUrl = React.useCallback(() => {
     if (url) {
       navigate(url);
     } else {
       navigate('/');
     }
-  };
+  }, [url]);
 
-  const onPopState = () => {
-    restoreSidebarVisibility();
-  };
+  React.useEffect(() => {
+    const onKeyUp = (ev: KeyboardEvent) => {
+      if (ev.key === 'Escape') {
+        goToUrl();
+      }
+    };
 
-  const onKeyUp = (ev: KeyboardEvent) => {
-    if (ev.key === 'Escape') {
-      goToUrl();
-    }
-  };
-
-  useEffect(() => {
     document.addEventListener('keyup', onKeyUp);
-    window.addEventListener('popstate', onPopState);
     return () => {
       document.removeEventListener('keyup', onKeyUp);
-      window.removeEventListener('popstate', onPopState);
     };
-  }, []);
+  }, [goToUrl]);
 
   return (
-    <StyledArtworkClose onClick={goToUrl} href={'javascript:void(0);'}>
+    <StyledArtworkClose onClick={goToUrl}>
       <VscClose size={56} />
     </StyledArtworkClose>
   );

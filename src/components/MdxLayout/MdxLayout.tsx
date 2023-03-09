@@ -1,9 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 
 import { SEO } from '../SEO';
 import { Article } from '../Article';
 
-export const MdxLayout = ({ children, title }) => (
+type MdxLayoutProps = {
+  children: React.ReactNode;
+  title: string;
+};
+export const MdxLayout: React.FC<MdxLayoutProps> = ({ children, title }) => (
   <>
     <SEO title={title} />
     <Article>{children}</Article>

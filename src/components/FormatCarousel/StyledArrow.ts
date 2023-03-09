@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const StyledArrow = styled.a`
+type StyledArrowProps = {
+  side: 'left' | 'right';
+};
+
+export const StyledArrow = styled.div<StyledArrowProps>`
   display: block;
   position: absolute;
   ${({ side }) =>
@@ -13,4 +17,5 @@ export const StyledArrow = styled.a`
         `}
   top: calc(50% - 28px);
   z-index: 10;
+  cursor: pointer;
 `;

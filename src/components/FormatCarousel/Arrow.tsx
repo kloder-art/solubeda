@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
 
 import { StyledArrow } from './StyledArrow';
@@ -6,8 +6,8 @@ import { StyledArrow } from './StyledArrow';
 type props = {
   className?: string;
   style?: any;
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
-  side: string;
+  onClick?: React.DOMAttributes<HTMLDivElement>['onClick'];
+  side: 'left' | 'right';
 };
 
 export const Arrow = ({ className, style, onClick, side }: props) => (
@@ -15,7 +15,6 @@ export const Arrow = ({ className, style, onClick, side }: props) => (
     className={className}
     style={{ ...style }}
     onClick={onClick}
-    href={'javascript:void(0);'}
     side={side}
   >
     {side === 'left' && <VscChevronLeft size={56} />}

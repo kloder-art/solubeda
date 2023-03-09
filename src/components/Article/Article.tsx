@@ -1,12 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
 import { StyledArticle } from './StyledArticle';
 
-export const Article = ({ children }) => (
+type ArticleProps = {
+  children: React.ReactNode;
+};
+
+export const Article: React.FC<ArticleProps> = ({ children }) => (
   <StyledArticle>{children}</StyledArticle>
 );
-
-Article.propTypes = {
-  children: PropTypes.node.isRequired,
-};

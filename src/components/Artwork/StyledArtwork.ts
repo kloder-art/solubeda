@@ -6,17 +6,17 @@ type Props = {
 };
 
 export const StyledArtwork = styled.div`
-  cursor: pointer;
   text-align: center;
+  cursor: pointer;
 
   @media (min-width: 920px) {
-    grid-row-end: span ${({spanY}: Props) => spanY ? spanY : 1};
-    grid-column-end: span ${({spanX}: Props) => spanX ? spanX : 1};
+    grid-row-end: span ${({ spanY }: Props) => (spanY ? spanY : 1)};
+    grid-column-end: span ${({ spanX }: Props) => (spanX ? spanX : 1)};
   }
 
   .gatsby-image-wrapper {
     max-width: 100%;
-    max-height: ${({spanY}: Props) => `${(spanY ? spanY : 1) * 300}px`};
+    max-height: ${({ spanY }: Props) => `${(spanY ? spanY : 1) * 300}px`};
     /* max-height: 300px; */
     transition: box-shadow 0.4s;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);

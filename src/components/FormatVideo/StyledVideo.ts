@@ -15,5 +15,6 @@ export const StyledVideo = styled.div`
     min-height: 100%;
     width: 100%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    border: 0;
   }
 `;

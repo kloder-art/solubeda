@@ -1,18 +1,34 @@
-import React, { useEffect } from 'react';
-import { SEO } from '../components/SEO';
-import { graphql } from 'gatsby';
+import * as React from 'react';
+import { graphql, PageProps } from 'gatsby';
+import type { IGatsbyImageData } from 'gatsby-plugin-image';
 
-import { store, actions } from '../state';
-import { Gallery } from '../components/Gallery';
-import { Artwork } from '../components/Artwork';
+import { Layout, SEO, Gallery, Artwork } from '../components';
 
-const IndexPage = ({ data }) => {
-  useEffect(() => {
-    store.dispatch(actions.setSidebarVisibility(true));
-  }, []);
+type Payload = {
+  data: {
+    allMdx: {
+      edges: {
+        node: {
+          id: string;
+          frontmatter: {
+            spanX: number;
+            spanY: number;
+            featured: IGatsbyImageData;
+            title: string;
+            slug: string;
+            images: { image: IGatsbyImageData }[];
+            format: string;
+            year: string;
+          };
+        };
+      }[];
+    };
+  };
+};
 
+const IndexPage: React.FC<PageProps & Payload> = ({ data }) => {
   return (
-    <>
+    <Layout>
       <SEO title={'Inicio'} keywords={['sol', 'ubeda', 'art', 'almería']} />
       <Gallery>
         {data.allMdx.edges.map(({ node: { id, frontmatter } }) => (
@@ -29,7 +45,7 @@ const IndexPage = ({ data }) => {
           />
         ))}
       </Gallery>
-    </>
+    </Layout>
   );
 };
 
@@ -41,7 +57,7 @@ export const query = graphql`
       filter: {
         frontmatter: { variant: { eq: "artworks" }, hidden: { eq: null } }
       }
-      sort: { fields: [frontmatter___time], order: DESC }
+      sort: { frontmatter: { time: DESC } }
     ) {
       edges {
         node {
@@ -58,7 +74,7 @@ export const query = graphql`
             featured {
               childImageSharp {
                 gatsbyImageData(
-                  placeholder: TRACED_SVG
+                  placeholder: DOMINANT_COLOR
                   formats: [AUTO, WEBP, AVIF]
                 )
               }

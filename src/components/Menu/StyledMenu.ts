@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const StyledMenu = styled.ul`
+type StyledMenuProps = {
+  showMenu: boolean;
+};
+
+export const StyledMenu = styled.ul<StyledMenuProps>`
   align-self: flex-start;
   justify-self: center;
   margin-top: 32px;

@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { FaYoutube } from 'react-icons/fa';
 
-import {StyledFooter} from './StyledFooter';
-import {StyledCopy} from './StyledCopy';
+import { StyledFooter } from './StyledFooter';
+import { StyledCopy } from './StyledCopy';
 
 const year = new Date().getFullYear();
 
@@ -14,7 +14,11 @@ const socialMap = [
   },
 ];
 
-export const Footer = ({showMenu}) => (
+type FooterProps = {
+  showMenu: boolean;
+};
+
+export const Footer: React.FC<FooterProps> = ({ showMenu }) => (
   <StyledFooter showMenu={showMenu}>
     <ul>
       {socialMap.map((item, idx) => (

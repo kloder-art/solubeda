@@ -1,21 +1,41 @@
-import React from 'react';
-import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
+import * as React from 'react';
+import { graphql, PageProps } from 'gatsby';
 
-import { Article } from '../../components/Article';
+import { Article, Layout } from '../../components';
 
-export default ({ data: { mdx } }) => (
-  <Article>
-    <h2>{mdx.frontmatter.title}</h2>
-    <p>Publicado el {mdx.frontmatter.date}</p>
-    <img
-      src={mdx.frontmatter.featured.childImageSharp.original.src}
-      alt={mdx.frontmatter.title}
-      style={{ maxWidth: '100%' }}
-    />
-    <MDXRenderer>{mdx.body}</MDXRenderer>
-  </Article>
+type Data = {
+  mdx: {
+    frontmatter: {
+      title: string;
+      date: string;
+      featured: {
+        childImageSharp: {
+          original: {
+            src: string;
+          };
+        };
+      };
+    };
+    body: string;
+  };
+};
+
+const PressPage: React.FC<PageProps & { data: Data }> = ({ data: { mdx } }) => (
+  <Layout>
+    <Article>
+      <h2>{mdx.frontmatter.title}</h2>
+      <p>Publicado el {mdx.frontmatter.date}</p>
+      <img
+        src={mdx.frontmatter.featured.childImageSharp.original.src}
+        alt={mdx.frontmatter.title}
+        style={{ maxWidth: '100%' }}
+      />
+      {mdx.body}
+    </Article>
+  </Layout>
 );
+
+export default PressPage;
 
 export const query = graphql`
   query ($id: String) {

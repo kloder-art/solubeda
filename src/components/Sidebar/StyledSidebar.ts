@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const StyledSidebar = styled.nav`
+type StyledSidebarProps = {
+  showMenu: boolean;
+};
+
+export const StyledSidebar = styled.nav<StyledSidebarProps>`
   display: grid;
   grid-template-rows: 86px auto 16px;
   grid-template-columns: 1fr;
@@ -13,10 +17,12 @@ export const StyledSidebar = styled.nav`
     min-width: 100vw;
     pointer-events: none;
 
-    ${({showMenu}) => showMenu && css`
-      pointer-events: all;
-      background-color: rgba(0, 0, 0, 0.7);
-    `}
+    ${({ showMenu }) =>
+      showMenu &&
+      css`
+        pointer-events: all;
+        background-color: rgba(0, 0, 0, 0.7);
+      `}
   }
 
   height: 100vh;

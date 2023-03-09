@@ -1,19 +1,29 @@
-import React, { useRef, useEffect } from 'react';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import * as React from 'react';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 
 import { ArtworkClose } from '../ArtworkClose';
-
 import { StyledCam } from './StyledCam';
 import { StyledImageHolder } from './StyledImageHolder';
 
 // For avoid call several times by the animation
 const status = { enter: false, exit: false };
 
-export const FormatCam = ({ data, images, returnPage }) => {
-  const camRef = useRef(null);
-  useEffect(() => {
-    const cam = camRef.current;
-    let camStream = null;
+type FormatCamProps = {
+  data: { frontmatter: { title: string } };
+  images: { image: IGatsbyImageData; title: string }[];
+  returnPage: string;
+};
+
+export const FormatCam: React.FC<FormatCamProps> = ({
+  data,
+  images,
+  returnPage,
+}) => {
+  const camRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const cam = camRef.current as HTMLVideoElement;
+    let camStream: MediaStream;
     if (!status.enter) {
       if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices
@@ -51,10 +61,10 @@ export const FormatCam = ({ data, images, returnPage }) => {
   return (
     <>
       <ArtworkClose url={returnPage} />
-      <StyledCam autoplay={'true'} ref={camRef} />
+      <StyledCam autoPlay={true} ref={camRef} />
       <StyledImageHolder>
         <GatsbyImage
-          image={getImage(image.image)}
+          image={getImage(image.image) as IGatsbyImageData}
           alt={image.title || data.frontmatter.title}
         />
       </StyledImageHolder>

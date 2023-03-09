@@ -1,15 +1,21 @@
 import styled, { css } from 'styled-components';
 
-export const StyledMain = styled.main`
+type StyledMainProps = {
+  sidebar: boolean;
+};
+
+export const StyledMain = styled.main<StyledMainProps>`
   overflow: hidden;
   overflow-y: auto;
 
-  ${({ sidebar }) => sidebar && css`
-    padding-top: 32px;
-    @media (max-width: 920px) {
-      /* padding-top: 128px; */
-    }
-  `}
+  ${({ sidebar }) =>
+    sidebar &&
+    css`
+      padding-top: 32px;
+      @media (max-width: 920px) {
+        /* padding-top: 128px; */
+      }
+    `}
 
   @media (min-width: 920px) {
     width: ${({ sidebar }) => (!sidebar ? '100vw' : 'calc(100vw - 280px)')};
@@ -36,4 +42,3 @@ export const StyledMain = styled.main`
     background: darkgrey;
   }
 `;
-

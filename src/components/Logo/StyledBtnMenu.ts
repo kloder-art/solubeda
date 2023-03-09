@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const StyledBtnMenu = styled.div`
+type StyledBtnMenuProps = {
+  showMenu: boolean;
+};
+
+export const StyledBtnMenu = styled.div<StyledBtnMenuProps>`
   align-self: flex-start;
   justify-self: right;
   pointer-events: all;

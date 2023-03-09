@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const StyledLogo = styled.a`
+type StyledLogoProps = {
+  showMenu: boolean;
+};
+
+export const StyledLogo = styled.div<StyledLogoProps>`
   display: grid;
   grid-template-columns: auto auto;
   img {
@@ -16,7 +20,7 @@ export const StyledLogo = styled.a`
       pointer-events: none;
     }
 
-    ${(showMenu: boolean) =>
+    ${(showMenu) =>
       showMenu &&
       css`
         img {

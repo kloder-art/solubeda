@@ -1,18 +1,27 @@
-import React from 'react';
+import * as React from 'react';
 import { navigate } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import { FiBox, FiFilm, FiCamera } from 'react-icons/fi';
 
-import { store, actions } from '../../state';
 import { StyledArtwork } from './StyledArtwork';
 import { StyledArtworkInfo } from './StyledArtworkInfo';
 
 const goToDetail = (slug: string) => {
-  store.dispatch(actions.setSidebarVisibility(false));
-  navigate(`/artworks/${slug}/`);
+  navigate(`/artwork/${slug}/`);
 };
 
-export const Artwork = ({
+type ArtworkProps = {
+  spanY: number;
+  spanX: number;
+  featured: IGatsbyImageData;
+  title: string;
+  slug: string;
+  images: unknown[];
+  format: string;
+  year: string;
+};
+
+export const Artwork: React.FC<ArtworkProps> = ({
   spanY,
   spanX,
   featured,
@@ -23,12 +32,21 @@ export const Artwork = ({
   year,
 }) => (
   <StyledArtwork spanX={spanX} spanY={spanY}>
-    <GatsbyImage
-      image={getImage(featured)}
-      alt={`${title} imagen`}
-      onClick={() => goToDetail(slug)}
-    />
-    <StyledArtworkInfo onClick={() => goToDetail(slug)}>
+    <div
+      onClick={() => {
+        goToDetail(slug);
+      }}
+    >
+      <GatsbyImage
+        image={getImage(featured) as IGatsbyImageData}
+        alt={`${title} imagen`}
+      />
+    </div>
+    <StyledArtworkInfo
+      onClick={() => {
+        goToDetail(slug);
+      }}
+    >
       {format === 'serie' && <div className={'total'}>{images.length}</div>}
       {format === 'video' && (
         <FiFilm size={32} style={{ marginRight: '8px' }} />

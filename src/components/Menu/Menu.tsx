@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'gatsby';
 
 import { StyledMenu } from './StyledMenu';
@@ -11,7 +11,12 @@ const items = [
   { link: '/contact', text: 'Contacto' },
 ];
 
-export const Menu = ({ showMenu, onClick }) => (
+type MenuProps = {
+  showMenu: boolean;
+  onClick: () => void;
+};
+
+export const Menu: React.FC<MenuProps> = ({ showMenu, onClick }) => (
   <StyledMenu showMenu={showMenu}>
     {items.map((item, idx) => (
       <li key={item.text}>

@@ -1,5 +1,4 @@
-import React from 'react';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
+import * as React from 'react';
 
 import { ArtworkClose } from '../ArtworkClose';
 
@@ -7,7 +6,21 @@ import { StyledVideo } from './StyledVideo';
 import { StyledHeader } from './StyledHeader';
 import { StyledInfo } from './StyledInfo';
 
-export const FormatVideo = ({ data, returnPage }) => {
+type FormatVideoProps = {
+  data: {
+    frontmatter: {
+      video: string;
+      title: string;
+    };
+    body: string;
+  };
+  returnPage: string;
+};
+
+export const FormatVideo: React.FC<FormatVideoProps> = ({
+  data,
+  returnPage,
+}) => {
   const src = `https://www.youtube.com/embed/${data.frontmatter.video}`;
   return (
     <>
@@ -19,15 +32,12 @@ export const FormatVideo = ({ data, returnPage }) => {
           width={560}
           height={315}
           src={src}
-          frameBorder={0}
           allow={
             'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
           }
           allowFullScreen
         />
-        <StyledInfo>
-          <MDXRenderer>{data.body}</MDXRenderer>
-        </StyledInfo>
+        <StyledInfo>{data.body}</StyledInfo>
       </StyledVideo>
     </>
   );
