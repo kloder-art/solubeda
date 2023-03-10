@@ -7,19 +7,17 @@ import { Layout, SEO, Gallery, Artwork } from '../components';
 type Payload = {
   data: {
     allMdx: {
-      edges: {
-        node: {
-          id: string;
-          frontmatter: {
-            spanX: number;
-            spanY: number;
-            featured: IGatsbyImageData;
-            title: string;
-            slug: string;
-            images: { image: IGatsbyImageData }[];
-            format: string;
-            year: string;
-          };
+      nodes: {
+        id: string;
+        frontmatter: {
+          spanX: number;
+          spanY: number;
+          featured: IGatsbyImageData;
+          title: string;
+          slug: string;
+          images: { image: IGatsbyImageData }[];
+          format: string;
+          year: string;
         };
       }[];
     };
@@ -31,7 +29,7 @@ const IndexPage: React.FC<PageProps & Payload> = ({ data }) => {
     <Layout>
       <SEO title={'Inicio'} keywords={['sol', 'ubeda', 'art', 'almería']} />
       <Gallery>
-        {data.allMdx.edges.map(({ node: { id, frontmatter } }) => (
+        {data.allMdx.nodes.map(({ id, frontmatter }) => (
           <Artwork
             key={id}
             spanX={frontmatter.spanX}
@@ -59,34 +57,32 @@ export const query = graphql`
       }
       sort: { frontmatter: { time: DESC } }
     ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            slug
-            variant
-            format
-            time
-            year
-            technic
-            dimensions
-            featured {
-              childImageSharp {
-                gatsbyImageData(
-                  placeholder: DOMINANT_COLOR
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
-            }
-            spanX
-            spanY
-            images {
-              title
+      nodes {
+        id
+        frontmatter {
+          title
+          slug
+          variant
+          format
+          time
+          year
+          technic
+          dimensions
+          featured {
+            childImageSharp {
+              gatsbyImageData(
+                placeholder: DOMINANT_COLOR
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
-          body
+          spanX
+          spanY
+          images {
+            title
+          }
         }
+        body
       }
     }
   }

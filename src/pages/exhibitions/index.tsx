@@ -6,16 +6,14 @@ import { SEO, List, Header, Layout } from '../../components';
 
 type Data = {
   allMdx: {
-    edges: {
-      node: {
-        frontmatter: {
-          date: string;
-          featured: string;
-          title: string;
-          slug: string;
-        };
-        body: string;
+    nodes: {
+      frontmatter: {
+        date: string;
+        featured: string;
+        title: string;
+        slug: string;
       };
+      body: string;
     }[];
   };
 };
@@ -25,13 +23,13 @@ const ExhibitionsPage: React.FC<PageProps & { data: Data }> = ({ data }) => (
     <SEO title="Exposiciones" />
     <Header>Exposiciones</Header>
     <List
-      items={data.allMdx.edges.map(({ node }) => {
+      items={data.allMdx.nodes.map(({ frontmatter, body }) => {
         return {
-          date: node.frontmatter.date,
-          image: node.frontmatter.featured,
-          title: node.frontmatter.title,
-          slug: node.frontmatter.slug,
-          desc: node.body,
+          date: frontmatter.date,
+          image: frontmatter.featured,
+          title: frontmatter.title,
+          slug: frontmatter.slug,
+          desc: body,
         };
       })}
       onItemClick={(slug: string) => {
@@ -49,25 +47,23 @@ export const query = graphql`
       filter: { frontmatter: { variant: { eq: "exhibitions" } } }
       sort: { frontmatter: { date: DESC } }
     ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            slug
-            date(formatString: "DD/MM/YYYY")
-            format
-            featured {
-              childImageSharp {
-                gatsbyImageData(
-                  placeholder: DOMINANT_COLOR
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
+      nodes {
+        id
+        frontmatter {
+          title
+          slug
+          date(formatString: "DD/MM/YYYY")
+          format
+          featured {
+            childImageSharp {
+              gatsbyImageData(
+                placeholder: DOMINANT_COLOR
+                formats: [AUTO, WEBP, AVIF]
+              )
             }
           }
-          body
         }
+        body
       }
     }
   }

@@ -1622,11 +1622,146 @@ type PotraceTurnPolicy =
   | 'right'
   | 'white';
 
+type PressMdx = Node & {
+  readonly children: ReadonlyArray<Node>;
+  readonly date: Scalars['Date'];
+  readonly id: Scalars['ID'];
+  readonly internal: Internal;
+  readonly joinedAt: Maybe<Mdx>;
+  readonly parent: Maybe<Node>;
+  readonly slug: Scalars['String'];
+  readonly title: Scalars['String'];
+  readonly variant: Scalars['String'];
+};
+
+type PressMdxConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<PressMdxEdge>;
+  readonly group: ReadonlyArray<PressMdxGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<PressMdx>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type PressMdxConnection_distinctArgs = {
+  field: PressMdxFieldSelector;
+};
+
+
+type PressMdxConnection_groupArgs = {
+  field: PressMdxFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type PressMdxConnection_maxArgs = {
+  field: PressMdxFieldSelector;
+};
+
+
+type PressMdxConnection_minArgs = {
+  field: PressMdxFieldSelector;
+};
+
+
+type PressMdxConnection_sumArgs = {
+  field: PressMdxFieldSelector;
+};
+
+type PressMdxEdge = {
+  readonly next: Maybe<PressMdx>;
+  readonly node: PressMdx;
+  readonly previous: Maybe<PressMdx>;
+};
+
+type PressMdxFieldSelector = {
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly date: InputMaybe<FieldSelectorEnum>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly joinedAt: InputMaybe<MdxFieldSelector>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+  readonly slug: InputMaybe<FieldSelectorEnum>;
+  readonly title: InputMaybe<FieldSelectorEnum>;
+  readonly variant: InputMaybe<FieldSelectorEnum>;
+};
+
+type PressMdxFilterInput = {
+  readonly children: InputMaybe<NodeFilterListInput>;
+  readonly date: InputMaybe<DateQueryOperatorInput>;
+  readonly id: InputMaybe<StringQueryOperatorInput>;
+  readonly internal: InputMaybe<InternalFilterInput>;
+  readonly joinedAt: InputMaybe<MdxFilterInput>;
+  readonly parent: InputMaybe<NodeFilterInput>;
+  readonly slug: InputMaybe<StringQueryOperatorInput>;
+  readonly title: InputMaybe<StringQueryOperatorInput>;
+  readonly variant: InputMaybe<StringQueryOperatorInput>;
+};
+
+type PressMdxGroupConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<PressMdxEdge>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+  readonly group: ReadonlyArray<PressMdxGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<PressMdx>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type PressMdxGroupConnection_distinctArgs = {
+  field: PressMdxFieldSelector;
+};
+
+
+type PressMdxGroupConnection_groupArgs = {
+  field: PressMdxFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type PressMdxGroupConnection_maxArgs = {
+  field: PressMdxFieldSelector;
+};
+
+
+type PressMdxGroupConnection_minArgs = {
+  field: PressMdxFieldSelector;
+};
+
+
+type PressMdxGroupConnection_sumArgs = {
+  field: PressMdxFieldSelector;
+};
+
+type PressMdxSortInput = {
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly date: InputMaybe<SortOrderEnum>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly joinedAt: InputMaybe<MdxSortInput>;
+  readonly parent: InputMaybe<NodeSortInput>;
+  readonly slug: InputMaybe<SortOrderEnum>;
+  readonly title: InputMaybe<SortOrderEnum>;
+  readonly variant: InputMaybe<SortOrderEnum>;
+};
+
 type Query = {
   readonly allDirectory: DirectoryConnection;
   readonly allFile: FileConnection;
   readonly allImageSharp: ImageSharpConnection;
   readonly allMdx: MdxConnection;
+  readonly allPressMdx: PressMdxConnection;
   readonly allSite: SiteConnection;
   readonly allSiteBuildMetadata: SiteBuildMetadataConnection;
   readonly allSiteFunction: SiteFunctionConnection;
@@ -1636,6 +1771,7 @@ type Query = {
   readonly file: Maybe<File>;
   readonly imageSharp: Maybe<ImageSharp>;
   readonly mdx: Maybe<Mdx>;
+  readonly pressMdx: Maybe<PressMdx>;
   readonly site: Maybe<Site>;
   readonly siteBuildMetadata: Maybe<SiteBuildMetadata>;
   readonly siteFunction: Maybe<SiteFunction>;
@@ -1673,6 +1809,14 @@ type Query_allMdxArgs = {
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<ReadonlyArray<InputMaybe<MdxSortInput>>>;
+};
+
+
+type Query_allPressMdxArgs = {
+  filter: InputMaybe<PressMdxFilterInput>;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<PressMdxSortInput>>>;
 };
 
 
@@ -1824,6 +1968,19 @@ type Query_mdxArgs = {
   internal: InputMaybe<InternalFilterInput>;
   parent: InputMaybe<NodeFilterInput>;
   tableOfContents: InputMaybe<JSONQueryOperatorInput>;
+};
+
+
+type Query_pressMdxArgs = {
+  children: InputMaybe<NodeFilterListInput>;
+  date: InputMaybe<DateQueryOperatorInput>;
+  id: InputMaybe<StringQueryOperatorInput>;
+  internal: InputMaybe<InternalFilterInput>;
+  joinedAt: InputMaybe<MdxFilterInput>;
+  parent: InputMaybe<NodeFilterInput>;
+  slug: InputMaybe<StringQueryOperatorInput>;
+  title: InputMaybe<StringQueryOperatorInput>;
+  variant: InputMaybe<StringQueryOperatorInput>;
 };
 
 
