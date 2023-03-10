@@ -34,6 +34,11 @@
     "sass": "^1.58.3",
     "styled-components": "^5.3.0"
   },
+  "overrides": {
+    "babel-plugin-lodash": {
+      "@babel/types": "~7.20.0"
+    }
+  },
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
