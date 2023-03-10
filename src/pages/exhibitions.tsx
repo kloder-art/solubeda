@@ -2,7 +2,7 @@ import * as React from 'react';
 import { graphql, PageProps } from 'gatsby';
 import { navigate } from '@reach/router';
 
-import { SEO, List, Header, Layout } from '../../components';
+import { SEO, List, Header, Layout } from '../components';
 
 type Data = {
   allMdx: {

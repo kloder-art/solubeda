@@ -7,7 +7,7 @@ import { StyledArtwork } from './StyledArtwork';
 import { StyledArtworkInfo } from './StyledArtworkInfo';
 
 const goToDetail = (slug: string) => {
-  navigate(`/artwork/${slug}/`);
+  navigate(`/artworks/${slug}/`);
 };
 
 type ArtworkProps = {
