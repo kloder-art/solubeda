@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Group, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 import { ArtworkClose } from '../ArtworkClose';
 
 import { createCube } from './cube';
 import { createGuides } from './guides';
-import { StyledContainer } from './StyledContainer';
+import { StyledCanvas } from './StyledContainer';
 import { parse, getLargest } from './dimensions';
 
 type FormatCubeProps = {
@@ -20,86 +20,74 @@ export const FormatCube: React.FC<FormatCubeProps> = ({
   images,
   returnPage,
 }) => {
-  const mountRef = React.useRef<HTMLDivElement>(null);
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const dimensions = parse(data.frontmatter.dimensions);
   const maxDimension = getLargest(dimensions);
 
-  const sceneRef = React.useRef<Scene>(new Scene());
-  const rendererRef = React.useRef<WebGLRenderer>(
-    new WebGLRenderer({ antialias: true, alpha: true })
-  );
-  const cameraRef = React.useRef<PerspectiveCamera>();
-  const controlsRef = React.useRef<OrbitControls>();
-  const cubeRef = React.useRef<Group>();
-  let frameId: number;
-
-  const onWindowResize = () => {
-    const camera = cameraRef.current as PerspectiveCamera;
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    rendererRef.current.setSize(window.innerWidth, window.innerHeight);
-    renderScene();
-  };
-
-  const animate = () => {
-    const controls = controlsRef.current as OrbitControls;
-    const cube = cubeRef.current as Group;
-    cube.rotation.y += 0.001;
-    controls.update();
-    renderScene();
-    frameId = window.requestAnimationFrame(animate);
-  };
-
-  const renderScene = () => {
-    const camera = cameraRef.current as PerspectiveCamera;
-    rendererRef.current.render(sceneRef.current as Scene, camera);
-  };
-
-  const start = () => {
-    if (!frameId) {
-      frameId = requestAnimationFrame(animate);
-    }
-  };
-
-  const stop = () => {
-    cancelAnimationFrame(frameId);
-  };
-
   React.useEffect(() => {
-    const mount = mountRef.current as HTMLDivElement;
-    const width = mount.clientWidth;
-    const height = mount.clientHeight;
-    cameraRef.current = new PerspectiveCamera(
-      75,
-      width / height,
-      0.1,
-      1000
-    );
-    // Almost the double of the larger cube dimension
-    cameraRef.current.position.z = maxDimension * 1.2;
+    let frameId: number;
+    const canvas = canvasRef.current as HTMLCanvasElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
 
     // Renderer
-    rendererRef.current.setClearColor(0x000000, 0);
-    rendererRef.current.setSize(width, height);
-    mount.appendChild(rendererRef.current.domElement);
+    const renderer = new WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      canvas,
+    });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setSize(width, height);
+
+    // Scene
+    const scene = new Scene();
+
+    // Camera
+    const camera = new PerspectiveCamera(75, width / height, 0.1, 1000);
+    // Almost the double of the larger cube dimension
+    camera.position.z = maxDimension * 1.2;
 
     // Controls
-    // controls = new OrbitControls(camera, renderer.domElement);
-    controlsRef.current = new OrbitControls(
-      cameraRef.current,
-      rendererRef.current.domElement
-    );
-    controlsRef.current.enabled = true;
-    controlsRef.current.maxDistance = 1500;
-    controlsRef.current.minDistance = 0;
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enabled = true;
+    controls.maxDistance = 1500;
+    controls.minDistance = 0;
 
     // Geometry
-    cubeRef.current = createCube(dimensions, images);
-    cubeRef.current.add(createGuides(dimensions));
+    const cube = createCube(dimensions, images);
+    cube.add(createGuides(dimensions));
+
+    const onWindowResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderScene();
+    };
+
+    const animate = () => {
+      cube.rotation.y += 0.001;
+      controls.update();
+      renderScene();
+      frameId = window.requestAnimationFrame(animate);
+    };
+
+    const renderScene = () => {
+      renderer.render(scene, camera);
+    };
+
+    const start = () => {
+      if (!frameId) {
+        frameId = requestAnimationFrame(animate);
+      }
+    };
+
+    const stop = () => {
+      cancelAnimationFrame(frameId);
+    };
 
     // Put all together
-    sceneRef.current.add(cubeRef.current);
-    controlsRef.current.update();
+    scene.add(cube);
+    controls.update();
     renderScene();
     start();
 
@@ -107,16 +95,13 @@ export const FormatCube: React.FC<FormatCubeProps> = ({
     return () => {
       window.removeEventListener('resize', onWindowResize, false);
       stop();
-      if (mount) {
-        mount.removeChild(rendererRef.current.domElement);
-      }
     };
   }, []);
 
   return (
     <>
       <ArtworkClose url={returnPage} />
-      <StyledContainer ref={mountRef} />
+      <StyledCanvas ref={canvasRef} />
     </>
   );
 };

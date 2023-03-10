@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+export const StyledCanvas = styled.canvas`
   width: 100%;
   height: 100vh;
   overflow: hidden;
